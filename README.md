@@ -4,6 +4,6 @@ Working Title is a text adventure game that lets the user play as a man. It foll
 
 Includes a variety of envioronments to traverse and explore; along with certain collectibles which impact your stats
 
-Choose wisely, as player choices have monumental effect on gameplay and guide man to victory.
+Choose wisely, as player choices have monumental effect on gameplay and guide character to victory.
 
 I will accomplish this by using Java as well using the OHero repository for occasional reference.
