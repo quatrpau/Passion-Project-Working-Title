@@ -5,4 +5,5 @@ public interface Being {
     void takeDamage(int amt);
     boolean isAlive();
     int getHp();
+    int getSpeed();
 }

@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class InputTaker {
-    private Scanner inputTaker;
+    private final Scanner inputTaker;
     public InputTaker() {
         this.inputTaker = new Scanner(System.in);
     }
@@ -13,7 +13,7 @@ public class InputTaker {
     }
     //translate player input here
     //how to boot player back out?
-    public boolean yesOrNo(String input){
+    private boolean yesOrNo(String input){
         switch(input.toLowerCase(Locale.ROOT)){
             case "y": case "yes":
                 return true;
@@ -23,5 +23,8 @@ public class InputTaker {
                 System.out.println("what?");
                 return false;
         }
+    }
+    public boolean getYesOrNo(){
+        return yesOrNo(getPlayerInput());
     }
 }
