@@ -83,6 +83,10 @@ public class Battle {
     }
     //All Other Turns
     private int playerTurn(int countercode){
+        //battle has been won
+        if(countercode == -2){
+           return -2;
+        }
         //surrender
         if(countercode == -1){
             display.print("Do you accept your opponent's surrender?(y/n)");
@@ -91,7 +95,7 @@ public class Battle {
                 return -1;
             }
             else{
-                display.print("You deny the request with a vicious attack.");
+                display.print("You deny the request with a vicious attack! (x2 Damage)");
                 return you.giveDamage() * 2;
             }
         }
@@ -111,6 +115,10 @@ public class Battle {
         }
     }
     private int opponentTurn(int countercode){
+        //battle has been won
+        if(countercode == -2){
+            return -2;
+        }
         //surrender
         if(countercode == -1){
             if(opponent.decideTime()){
@@ -118,7 +126,7 @@ public class Battle {
                 return -1;
             }
             else{
-                display.print("They deny your request with a vicious attack!");
+                display.print("They deny your request with a vicious attack! (x2 Damage)");
                 return opponent.giveDamage() * 2;
             }
         }
