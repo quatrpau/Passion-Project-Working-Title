@@ -3,16 +3,17 @@ package utilities;
 import models.Enemy;
 import models.Player;
 
-//have battle interface
+//have better text options
 public class Battle {
     private Enemy opponent;
     private Display display= new Display();
     private InputTaker inputTaker = new InputTaker();
     private Player you = Player.getYou();
+    private Boolean result;
     private static final String YOUR_TURN = "What will you do? \n 1.) Attack \n 2.) Surrender";
     public Battle(Enemy opponent) {
         this.opponent = opponent;
-        this.start();
+        this.result = this.start();
     }
     //chance of peace?
     public Boolean start(){
@@ -133,5 +134,8 @@ public class Battle {
             }
             return -2;
         }
+    }
+    public Boolean getResult(){
+        return this.result;
     }
 }

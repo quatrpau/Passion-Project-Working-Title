@@ -29,7 +29,19 @@ public class FinalEnvironment implements Environment {
     public void start(){
         display.print(flavorText);
         if(inputTaker.getYesOrNo()){
-            triggerBattle(new Enemy("Dragon",200,200,200));
+            Boolean outcome = triggerBattle(new Enemy("Dragon",200,200,200)).getResult();
+            if (outcome == null){
+                //maybe something better here?
+                display.print("Peace has been achieved");
+            }
+            else if(outcome){
+                display.print("You won");
+            }
+            else{
+                //game over screen?
+                display.print("GAME OVER");
+                //retry functionality?
+            }
         }
     }
 }

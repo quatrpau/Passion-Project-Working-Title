@@ -12,9 +12,9 @@ public class Game {
     //private Game(){}
     //initialize player in player class?
     public Player player;
-    private LinkedList<Environment> environments;
+    private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
-    private int currentEnvironment;
+    private final int currentEnvironment;
     //serialization start?
     public Game(Player player){
         this.player = player;
