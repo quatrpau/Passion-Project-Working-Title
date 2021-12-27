@@ -18,6 +18,7 @@ public class Battle {
     //chance of peace?
     public Boolean start(){
         boolean openToPeace = false;
+        //why is this statement redundant
         int intraTurnCommunicationStation = 0;
         int interTurnCommunicationStation = 0;
         boolean firstTurn = true;
