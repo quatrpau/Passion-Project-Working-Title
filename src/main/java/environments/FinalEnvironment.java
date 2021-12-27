@@ -8,8 +8,8 @@ import utilities.InputTaker;
 
 public class FinalEnvironment implements Environment {
     private String flavorText = "You see a dragon up ahead. Will you fight him?(y/n)";
-    private InputTaker inputTaker;
-    private Display display;
+    private InputTaker inputTaker = new InputTaker();
+    private Display display = new Display();
     @Override
     //return string instead?
     public Battle triggerBattle(Enemy opponent) {
