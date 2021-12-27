@@ -7,6 +7,7 @@ public final class Player implements Being {
     //vitality
     //speed
     //hp
+    private String name;
     private int speed;
     private int strength;
     private int hp;
@@ -43,4 +44,6 @@ public final class Player implements Being {
     public static Player getYou(){
         return YOU;
     }
+    public void setName(String name) { this.name = name;}
+    public String getName(){ return this.name;}
 }

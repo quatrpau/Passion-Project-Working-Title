@@ -41,6 +41,7 @@ public class Enemy implements Being {
     }
     public boolean decideTime(){
         //simple imple
+        //50-50
         return (Math.random() * (1 + 1) + 0) == 1;
     }
 }

@@ -7,23 +7,33 @@ import utilities.InputTaker;
 import java.util.LinkedList;
 //demo
 //singleton?
-public class Game {
+public class Game implements Runnable {
     //private static final Game INSTANCE;
     //private Game(){}
     //initialize player in player class?
+    public Display display = new Display();
+    public InputTaker inputTaker = new InputTaker();
     public Player player;
     private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
-    private final int currentEnvironment;
-    //serialization start?
-    public Game(Player player){
-        this.player = player;
+    //default currentEnvironment is 0
+    private int currentEnvironment = 0;
+    //brand new start
+    public Game(){
+        //create new Player;
+        this.player = Player.getYou();
+        display.print("What's your name?");
+        player.setName(inputTaker.getPlayerInput());
+        display.print("Your name is now: " + player.getName() + ". Welcome!");
+        //add all environments
         environments.add(new FinalEnvironment());
-        currentEnvironment = 0;
     }
     //all this implementation will be inside the environments
-    public void embark(){
-        environments.get(currentEnvironment).start();
+    //serialization start?
+    @Override
+    public void run() {
+        for(;currentEnvironment < environments.size(); currentEnvironment++){
+            environments.get(currentEnvironment).start();
+        }
     }
-
 }
