@@ -21,6 +21,7 @@ public class Battle {
         int intraTurnCommunicationStation = 0;
         int interTurnCommunicationStation = 0;
         boolean firstTurn = true;
+        //check if opponent and you are alive every turn
         while(opponent.isAlive() && you.isAlive() && !openToPeace){
             boolean playerGoesFirst = you.getSpeed() > opponent.getSpeed();
             if(firstTurn){
@@ -122,13 +123,13 @@ public class Battle {
         }
         //miss
         if(countercode == 0){
-            display.print("It does not...");
+            display.print("It does not land...");
             return playerTurn();
         }
         else{
             //print out toString of each being?
             opponent.takeDamage(countercode);
-            display.print("It does. Their health is now " + opponent.getHp() + ".");
+            display.print("It lands successfully. Their health is now " + opponent.getHp() + ".");
             if(opponent.isAlive()){
                 return opponentTurn();
             }
