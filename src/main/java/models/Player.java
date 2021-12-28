@@ -46,4 +46,5 @@ public final class Player implements Being {
     }
     public void setName(String name) { this.name = name;}
     public String getName(){ return this.name;}
+    //statusUpdate will print of string output of players current inventory and stats and name
 }

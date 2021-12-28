@@ -7,5 +7,5 @@ public interface Environment {
     Battle triggerBattle(Enemy opponent);
     String giveFlavorText();
     void setFlavorText(String flavorText);
-    void start();
+    Boolean start();
 }

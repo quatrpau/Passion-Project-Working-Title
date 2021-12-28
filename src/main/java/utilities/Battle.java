@@ -7,9 +7,8 @@ import models.Player;
 public class Battle {
     private Enemy opponent;
     private Display display= new Display();
-    private InputTaker inputTaker = new InputTaker();
-    private Player you = Player.getYou();
-    private Boolean result;
+    private final Player you = Player.getYou();
+    private final Boolean result;
     private static final String YOUR_TURN = "What will you do? \n 1.) Attack \n 2.) Surrender";
     public Battle(Enemy opponent) {
         this.opponent = opponent;
@@ -58,7 +57,7 @@ public class Battle {
     //1st Turns
     private int playerTurn(){
         display.print(YOUR_TURN);
-        if(inputTaker.getPlayerInput().equals("1")){
+        if(InputTaker.getPlayerInput().equals("1")){
             //fight
             display.print("You throw a punch, but does it connect?");
             return you.giveDamage();
@@ -90,7 +89,7 @@ public class Battle {
         //surrender
         if(countercode == -1){
             display.print("Do you accept your opponent's surrender?(y/n)");
-            if(inputTaker.getYesOrNo()){
+            if(InputTaker.getYesOrNo()){
                 display.print("You accept and the battle ends.");
                 return -1;
             }

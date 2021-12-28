@@ -12,7 +12,6 @@ public class Game implements Runnable {
     //private Game(){}
     //initialize player in player class?
     public Display display = new Display();
-    public InputTaker inputTaker = new InputTaker();
     public Player player;
     private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
@@ -23,7 +22,7 @@ public class Game implements Runnable {
         //create new Player;
         this.player = Player.getYou();
         display.print("What's your name?");
-        player.setName(inputTaker.getPlayerInput());
+        player.setName(InputTaker.getPlayerInput());
         display.print("Your name is now: " + player.getName() + ". Welcome!");
         //add all environments
         environments.add(new FinalEnvironment());
@@ -32,8 +31,17 @@ public class Game implements Runnable {
     //serialization start?
     @Override
     public void run() {
-        for(;currentEnvironment < environments.size(); currentEnvironment++){
-            environments.get(currentEnvironment).start();
+        //for(;currentEnvironment < environments.size(); currentEnvironment++){
+        boolean keepGoing = true;
+        while(keepGoing && currentEnvironment < environments.size()){
+            Boolean playerSurvived = environments.get(currentEnvironment).start();
+            if(!playerSurvived){
+                display.print("GAME OVER. Retry?(y/n)");
+                keepGoing = InputTaker.getYesOrNo();
+            }
+            else{
+                currentEnvironment++;
+            }
         }
     }
 }
