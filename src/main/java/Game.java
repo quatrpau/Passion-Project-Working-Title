@@ -24,6 +24,7 @@ public class Game implements Runnable {
         display.print("What's your name?");
         player.setName(InputTaker.getPlayerInput());
         display.print("Your name is now: " + player.getName() + ". Welcome!");
+        display.print("If this is your first time playing, try typing help to get information on availiable commands.");
         //add all environments
         environments.add(new FinalEnvironment());
     }
@@ -45,3 +46,10 @@ public class Game implements Runnable {
         }
     }
 }
+//verbs
+//(progression) exit?
+//look
+//status
+//use
+//use on
+//enter

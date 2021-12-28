@@ -3,10 +3,14 @@ package environments;
 import interfaces.Environment;
 import models.Enemy;
 import utilities.Battle;
+import utilities.Display;
+import utilities.InputTaker;
+
 //dusty gardening gloves buried in the sand
 public class DesertEnvironment implements Environment {
-    private String flavorText = "You enter the desert. A desolate place with orange sand stretching as far the eye can see." +
-            " All you see is cacti";
+    private final Display
+    private final String desertText = "You enter the desert. A desolate place with yellow stretching as far the eye can see, a lone cactus breaking the monotony. \n" +
+            "To your right you see an abandoned warehouse. You must cross the desert to get to the dragon. It will take 3 days by foot." ;
     @Override
     public Battle triggerBattle(Enemy opponent) {
         return null;
@@ -24,6 +28,13 @@ public class DesertEnvironment implements Environment {
 
     @Override
     public Boolean start() {
-        return false;
+        Display.print(desertText);
+        InputTaker.
     }
 }
+//desert enemies
+    //snake
+    //giant scorpion
+    //vulture
+
+//implement monetary system? //must find way to make money

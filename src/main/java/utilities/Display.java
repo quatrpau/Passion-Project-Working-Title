@@ -3,7 +3,7 @@ package utilities;
 //make static
 //make enum?
 public final class Display {
-    public void print(String text){
+    public static void print(String text){
         System.out.println(text);
     }
 }
