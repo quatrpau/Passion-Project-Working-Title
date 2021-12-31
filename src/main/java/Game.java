@@ -47,9 +47,10 @@ public class Game implements Runnable {
 }
 //VERBS
 //go (progression; location based)
-  //GO BACK
+  //GO BACK (have previous flag)
 //look/inspect
 //status
+    //check inventory
 //use
 //use on
 //get/pick up
@@ -59,10 +60,16 @@ public class Game implements Runnable {
 //in help section encourage player to try some commands of their own
 
 //interfaces
+    //ITEMS
     //takeable
     //usable
-    //actionable
+    //affectable<E extends USABLE>
     //wearable
 
+    //BEINGS
+    //speaker
     //battleable
-//interf
+
+    //all environments are goable // ie start method
+
+    //

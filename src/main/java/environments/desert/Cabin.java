@@ -1,4 +1,4 @@
-package environments.Desert;
+package environments.desert;
 
 import interfaces.Environment;
 import models.Enemy;

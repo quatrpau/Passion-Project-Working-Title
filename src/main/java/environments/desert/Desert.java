@@ -1,12 +1,13 @@
-package environments.Desert;
+package environments.desert;
 
 import interfaces.Environment;
 import models.Enemy;
 import utilities.Battle;
 
-public class Cactus implements Environment {
-
-    //battle cactus maybe?
+//maybe make desert display only orange and/or yellow depending
+//on whether or not you are at the entrance
+public class Desert implements Environment {
+    @Override
     public Battle triggerBattle(Enemy opponent) {
         return null;
     }

@@ -1,8 +1,8 @@
 //make this text yellow
-package environments.Desert;
-//maybe make a bunch of subenvironments?
+package environments.desert;
 import interfaces.Environment;
 import models.Enemy;
+import models.desert.DesertGuide;
 import utilities.Battle;
 import utilities.Display;
 import utilities.InputTaker;
@@ -11,22 +11,23 @@ import utilities.InputTaker;
 public class DesertEntrance implements Environment {
     //should i have a map or a list of surroundingsStrings
     private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow-Orange Desert\". A desolate place stretching as far as the eye can see. " +
-            "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat.  \n" +
-            "To your right, you see an abandoned cabin. To your left, a lone cactus. You must cross the desert to get to the dragon.  It will take 3 days by foot." ;
+            "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\"  \n" +
+            "To your right, you see an abandoned cabin. To your left, a lone cactus." ;
     //GO CABIN // GO RIGHT // RIGHT // MOVE RIGHT // CABIN //
-    private Environment cabin = new Cabin();
+    private final Environment cabin = new Cabin();
     //GO CACTUS // GO LEFT // LEFT // MOVE LEFT // CACTUS //
-    private Environment cactus = new Cactus();
-    private Environment desert = new Desert();
-    //have variable for woman?
-
+    private final Environment cactus = new Cactus();
+    //enter desert// desert// yellow-orange desert// enter yellow-orange desert// go desert
+    //maybe have text for dessert misspelling
+    private final Environment desert = new Desert();
+    //guide
+    private final DesertGuide guide = new DesertGuide();
     //kick door
     //force door
     //push door
 
     // how to represent things that you can use when you have but don't have yet(maybe [ITEM])
-    private String cactusText = "You approach the cactus. You've heard that you can extract inside a cactus by cutting it open. If only you had a way to do that. \n" +
-            "A large rock is propped up at the base of the cactus";
+
     //get rock: custom text, edit cactus text and text that says you have rock if you do get rock again
     //use rock on door: text; edit cabinOutside & text stating you can't do it again & allow entrance
         //maybe edit cabinOutside to cabinInside
@@ -43,7 +44,7 @@ public class DesertEntrance implements Environment {
 
     @Override
     public void setFlavorText(String flavorText) {
-
+        this.flavorText = flavorText;
     }
     //have all the variants translate to GO whatever
     @Override
@@ -54,12 +55,18 @@ public class DesertEntrance implements Environment {
             Display.print("What will you do?");
             String decision;
             if((decision = inputRepair(InputTaker.getPlayerInput())) != null) {
-                //if cabin
-                if(decision.equals("GO CABIN")){
-                    cabin.start();
+                if(decision.equals("go cabin")){
+                    //go cabin// go right // right // move right // cabin //
+                    keepGoing = cabin.start();
                 }
-                //if woman
-                //if cactus
+                else if(decision.equals("go woman")){
+                    //go woman// talk to woman// talk woman // woman
+                    //go guide// talk to guide// talk guide // guide (this may be bound to help)
+                    guide.speak();
+                }
+                else if(decision.equals("go cactus")){
+                    cactus.start();
+                }
                 //if desert
                 //reprint (look around)
                 //confusion
@@ -71,7 +78,7 @@ public class DesertEntrance implements Environment {
         return false;
     }
     private String inputRepair(String raw){
-        if(raw.equals("GO CABIN")){
+        if(raw.equals("go cabin")){
             return raw;
         }
         else{
