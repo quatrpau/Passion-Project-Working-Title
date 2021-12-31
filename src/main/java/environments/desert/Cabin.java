@@ -27,6 +27,7 @@ public class Cabin implements Environment {
 
     @Override
     public Boolean start() {
-        Display.print();
+        Display.print(flavorText);
+        return true;
     }
 }

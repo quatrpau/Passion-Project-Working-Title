@@ -1,4 +1,5 @@
 import environments.FinalEnvironment;
+import environments.desert.DesertEntrance;
 import interfaces.Environment;
 import models.Player;
 import utilities.Display;
@@ -21,10 +22,11 @@ public class Game implements Runnable {
         //create new Player;
         this.player = Player.getYou();
         Display.print("What's your name?");
-        player.setName(InputTaker.getPlayerInput());
+        player.setName(InputTaker.getPlayerName());
         Display.print("Your name is now: " + player.getName() + ". Welcome!");
-        Display.print("If this is your first time playing, try typing help to get information on availiable commands.");
+        Display.print("If this is your first time playing, try typing help to get information on available commands.\n");
         //add all environments
+        environments.add(new DesertEntrance());
         environments.add(new FinalEnvironment());
     }
     //all this implementation will be inside the environments

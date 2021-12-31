@@ -8,6 +8,9 @@ public final class InputTaker {
     public static String getPlayerInput(){
         return inputTaker.nextLine().toLowerCase(Locale.ROOT);
     }
+    public static String getPlayerName(){
+        return inputTaker.nextLine();
+    }
     //translate player input here
     //how to boot player back out?
     private static boolean yesOrNo(String input){

@@ -1,6 +1,7 @@
 package models;
 
 import interfaces.Being;
+import utilities.Inventory;
 
 public final class Player implements Being {
     //strength
@@ -11,11 +12,13 @@ public final class Player implements Being {
     private int speed;
     private int strength;
     private int hp;
+    private Inventory inventory;
     private static final Player YOU = new Player();
     private Player(){
         this.hp = 100;
         this.strength = 100;
         this.speed = 100;
+        this.inventory = new Inventory();
     }
     @Override
     public int giveDamage() {

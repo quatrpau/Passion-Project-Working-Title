@@ -7,6 +7,7 @@ import utilities.Battle;
 //maybe make desert display only orange and/or yellow depending
 //on whether or not you are at the entrance
 public class Desert implements Environment {
+    //have you die of thirst if you go without the cactus
     @Override
     public Battle triggerBattle(Enemy opponent) {
         return null;
@@ -22,6 +23,7 @@ public class Desert implements Environment {
 
     @Override
     public Boolean start() {
+
         return null;
     }
 }

@@ -26,6 +26,7 @@ public class Cactus implements Environment {
 
     @Override
     public Boolean start() {
-        return null;
+        giveFlavorText();
+        return true;
     }
 }

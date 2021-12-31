@@ -1,2 +1,5 @@
-package interfaces;public class Affectable {
+package interfaces;
+
+public interface Affectable<E extends Usable>{
+
 }

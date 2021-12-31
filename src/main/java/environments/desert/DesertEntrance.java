@@ -10,8 +10,8 @@ import utilities.InputTaker;
 //divide desert by half days or days? (should be reflected in text descriptor)
 public class DesertEntrance implements Environment {
     //should i have a map or a list of surroundingsStrings
-    private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow-Orange Desert\". A desolate place stretching as far as the eye can see. " +
-            "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\"  \n" +
+    private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow-Orange Desert\". A desolate place stretching as far as the eye can see.\n"
+            + "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\".\n" +
             "To your right, you see an abandoned cabin. To your left, a lone cactus." ;
     //GO CABIN // GO RIGHT // RIGHT // MOVE RIGHT // CABIN //
     private final Environment cabin = new Cabin();
@@ -50,6 +50,7 @@ public class DesertEntrance implements Environment {
     @Override
     public Boolean start() {
         boolean keepGoing = true;
+        boolean crossedDesert = false;
         while(keepGoing) {
             giveFlavorText();
             Display.print("What will you do?");
@@ -59,13 +60,13 @@ public class DesertEntrance implements Environment {
                     //go cabin// go right // right // move right // cabin //
                     keepGoing = cabin.start();
                 }
-                else if(decision.equals("go woman")){
+                else if(decision.equals("go guide")){
                     //go woman// talk to woman// talk woman // woman
                     //go guide// talk to guide// talk guide // guide (this may be bound to help)
                     guide.speak();
                 }
                 else if(decision.equals("go cactus")){
-                    cactus.start();
+                    keepGoing = cactus.start();
                 }
                 //if desert
                 //reprint (look around)
@@ -75,10 +76,19 @@ public class DesertEntrance implements Environment {
                 Display.print("Invalid input: try again");
             }
         }
+        if(crossedDesert){
+            return true;
+        }
         return false;
     }
     private String inputRepair(String raw){
         if(raw.equals("go cabin")){
+            return raw;
+        }
+        else if(raw.equals("go guide")){
+            return raw;
+        }
+        else if(raw.equals("go cactus")){
             return raw;
         }
         else{
