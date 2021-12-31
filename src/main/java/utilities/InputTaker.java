@@ -27,5 +27,5 @@ public final class InputTaker {
     public static boolean getYesOrNo(){
         return yesOrNo(getPlayerInput());
     }
-    //somehow implement verb system
+    //global verb check (status, stat, inventory, //look around, //exit)
 }

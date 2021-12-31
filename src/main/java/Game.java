@@ -5,8 +5,8 @@ import models.Player;
 import utilities.Display;
 import utilities.InputTaker;
 
+//have status accessible at any time (put this in the inputtaker class)
 import java.util.LinkedList;
-//demo
 //singleton?
 public class Game implements Runnable {
     //private static final Game INSTANCE;
@@ -24,7 +24,7 @@ public class Game implements Runnable {
         Display.print("What's your name?");
         player.setName(InputTaker.getPlayerName());
         Display.print("Your name is now: " + player.getName() + ". Welcome!");
-        Display.print("If this is your first time playing, try typing help to get information on available commands.\n");
+        Display.print("If this is your first time playing, try typing \"help\" to get information on available commands.\n");
         //add all environments
         environments.add(new DesertEntrance());
         environments.add(new FinalEnvironment());

@@ -1,6 +1,8 @@
 package models;
 
 import interfaces.Being;
+import interfaces.Item;
+import utilities.Display;
 import utilities.Inventory;
 
 public final class Player implements Being {
@@ -49,5 +51,11 @@ public final class Player implements Being {
     }
     public void setName(String name) { this.name = name;}
     public String getName(){ return this.name;}
+
+    //inventory
+    //returns whether it was successful
+    public void addToInventory(Item item){
+        this.inventory.add(item);
+    }
     //statusUpdate will print of string output of players current inventory and stats and name
 }

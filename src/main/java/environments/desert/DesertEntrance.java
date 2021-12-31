@@ -40,6 +40,7 @@ public class DesertEntrance implements Environment {
     @Override
     public void giveFlavorText() {
         Display.print(flavorText);
+        Display.print("What will you do?");
     }
 
     @Override
@@ -49,16 +50,16 @@ public class DesertEntrance implements Environment {
     //have all the variants translate to GO whatever
     @Override
     public Boolean start() {
+        giveFlavorText();
         boolean keepGoing = true;
         boolean crossedDesert = false;
         while(keepGoing) {
-            giveFlavorText();
-            Display.print("What will you do?");
             String decision;
             if((decision = inputRepair(InputTaker.getPlayerInput())) != null) {
                 if(decision.equals("go cabin")){
                     //go cabin// go right // right // move right // cabin //
                     keepGoing = cabin.start();
+                    if(keepGoing) giveFlavorText();
                 }
                 else if(decision.equals("go guide")){
                     //go woman// talk to woman// talk woman // woman
@@ -67,10 +68,10 @@ public class DesertEntrance implements Environment {
                 }
                 else if(decision.equals("go cactus")){
                     keepGoing = cactus.start();
+                    if(keepGoing) giveFlavorText();
                 }
                 //if desert
                 //reprint (look around)
-                //confusion
             }
             else{
                 Display.print("Invalid input: try again");
@@ -83,13 +84,13 @@ public class DesertEntrance implements Environment {
     }
     private String inputRepair(String raw){
         if(raw.equals("go cabin")){
-            return raw;
+            return "go cabin";
         }
         else if(raw.equals("go guide")){
-            return raw;
+            return "go guide";
         }
         else if(raw.equals("go cactus")){
-            return raw;
+            return "go cactus";
         }
         else{
             return null;
@@ -102,3 +103,7 @@ public class DesertEntrance implements Environment {
     //vulture
 
 //implement monetary system? //must find way to make money
+
+
+
+//reprint desc if they come from another area

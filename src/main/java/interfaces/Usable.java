@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface Usable {
-    void use();
+    //void use();
 }
