@@ -6,6 +6,7 @@ import utilities.Battle;
 import utilities.Display;
 
 public class Cactus implements Environment {
+    private Boolean cactusCutDown = false;
     private String flavorText =  "You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that. \n" +
             "A large rock is propped up at the base of the cactus";
     //battle cactus maybe?
