@@ -11,7 +11,6 @@ public class Game implements Runnable {
     //private static final Game INSTANCE;
     //private Game(){}
     //initialize player in player class?
-    public Display display = new Display();
     public Player player;
     private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
@@ -21,10 +20,10 @@ public class Game implements Runnable {
     public Game(){
         //create new Player;
         this.player = Player.getYou();
-        display.print("What's your name?");
+        Display.print("What's your name?");
         player.setName(InputTaker.getPlayerInput());
-        display.print("Your name is now: " + player.getName() + ". Welcome!");
-        display.print("If this is your first time playing, try typing help to get information on availiable commands.");
+        Display.print("Your name is now: " + player.getName() + ". Welcome!");
+        Display.print("If this is your first time playing, try typing help to get information on availiable commands.");
         //add all environments
         environments.add(new FinalEnvironment());
     }
@@ -37,7 +36,7 @@ public class Game implements Runnable {
         while(keepGoing && currentEnvironment < environments.size()){
             Boolean playerSurvived = environments.get(currentEnvironment).start();
             if(!playerSurvived){
-                display.print("GAME OVER. Retry?(y/n)");
+                Display.print("GAME OVER. Retry?(y/n)");
                 keepGoing = InputTaker.getYesOrNo();
             }
             else{
@@ -46,10 +45,24 @@ public class Game implements Runnable {
         }
     }
 }
-//verbs
-//(progression) exit?
-//look
+//VERBS
+//go (progression; location based)
+  //GO BACK
+//look/inspect
 //status
 //use
 //use on
-//enter
+//get/pick up
+
+//GO BACK
+
+//in help section encourage player to try some commands of their own
+
+//interfaces
+    //takeable
+    //usable
+    //actionable
+    //wearable
+
+    //battleable
+//interf

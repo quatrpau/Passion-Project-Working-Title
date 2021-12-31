@@ -4,8 +4,8 @@ import models.Enemy;
 import utilities.Battle;
 
 public interface Environment {
-    Battle triggerBattle(Enemy opponent);
-    String giveFlavorText();
+    Battle triggerBattle(Enemy opponent); //Maybe have battle environment and regular Environment
+    void giveFlavorText();//add index to give flavor text
     void setFlavorText(String flavorText);
     Boolean start();
 }

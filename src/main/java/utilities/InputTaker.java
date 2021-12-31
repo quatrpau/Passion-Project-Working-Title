@@ -6,7 +6,7 @@ import java.util.Scanner;
 public final class InputTaker {
     private static final Scanner inputTaker = new Scanner(System.in);
     public static String getPlayerInput(){
-        return inputTaker.nextLine();
+        return inputTaker.nextLine().toLowerCase(Locale.ROOT);
     }
     //translate player input here
     //how to boot player back out?
@@ -24,4 +24,5 @@ public final class InputTaker {
     public static boolean getYesOrNo(){
         return yesOrNo(getPlayerInput());
     }
+    //somehow implement verb system
 }

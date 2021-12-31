@@ -1,4 +1,5 @@
 //TODO
+//finish second environment
 //items in general & stat changing items (enum for flavor text?)
 //puzzles
 //implement verb system on game class
