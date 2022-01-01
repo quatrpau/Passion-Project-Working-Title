@@ -10,6 +10,5 @@ public class DesertGuide implements Speaker {
     @Override
     public void speak() {
         Display.print("You must cross the Yellow-Orange Desert to get to the dragon.  It will take 3 days by foot.");
-
     }
 }

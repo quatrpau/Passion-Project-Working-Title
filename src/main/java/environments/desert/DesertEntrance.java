@@ -16,7 +16,7 @@ public class DesertEntrance implements Environment {
     //GO CABIN // GO RIGHT // RIGHT // MOVE RIGHT // CABIN //
     private final Environment cabin = new Cabin();
     //GO CACTUS // GO LEFT // LEFT // MOVE LEFT // CACTUS //
-    private final Environment cactus = new Cactus();
+    private final Environment cactus = new CactusArea();
     //enter desert// desert// yellow-orange desert// enter yellow-orange desert// go desert
     //maybe have text for dessert misspelling
     private final Environment desert = new Desert();

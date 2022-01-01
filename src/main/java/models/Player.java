@@ -2,7 +2,6 @@ package models;
 
 import interfaces.Being;
 import interfaces.Item;
-import utilities.Display;
 import utilities.Inventory;
 
 public final class Player implements Being {
@@ -51,7 +50,12 @@ public final class Player implements Being {
     }
     public void setName(String name) { this.name = name;}
     public String getName(){ return this.name;}
-
+    public Boolean hasItem(String item){
+        return this.inventory.peek(item) != null;
+    }
+    public Item peekItem(String item){
+        return this.inventory.peek(item);
+    }
     //inventory
     //returns whether it was successful
     public void addToInventory(Item item){

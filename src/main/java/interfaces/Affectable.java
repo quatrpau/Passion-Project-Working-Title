@@ -3,4 +3,5 @@ package interfaces;
 public interface Affectable<E extends Usable>{
     //returns whether or not it was successful
     Boolean getAffected(E catalyst);
+    void setFlavorText(String flavorText);
 }

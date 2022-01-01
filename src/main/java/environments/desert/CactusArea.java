@@ -7,8 +7,8 @@ import models.desert.Rock;
 import utilities.Battle;
 import utilities.Display;
 import utilities.InputTaker;
-
-public class Cactus implements Environment {
+//remove get flavor text replace with toString();
+public class CactusArea implements Environment {
     private Boolean cactusCutDown = false;
     private Boolean rockIsGone = false;
     private String flavorText =  "You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that. \n" +

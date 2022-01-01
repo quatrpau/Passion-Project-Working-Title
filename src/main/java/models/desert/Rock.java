@@ -11,8 +11,8 @@ public class Rock implements Item, Usable {
     }
 
     @Override
-    public String getFlavorText() {
-        return "A sizable hunk of solidified lava. Could be sedimentary, igneous, or metamorphosis but you don't know, or care. \n" ;
+    public String getDescription() {
+        return "A sizable hunk of solidified lava. \n" ;
     }
 
 }

@@ -18,7 +18,7 @@ public class Inventory {
     public void remove(String item){
         this.inventory.remove(item);
     }
-    public Item has(String item){
+    public Item peek(String item){
         if(inventory.containsKey(item)){
             return inventory.get(item);
         }
