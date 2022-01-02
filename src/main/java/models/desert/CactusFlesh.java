@@ -12,6 +12,6 @@ public class CactusFlesh implements Item {
 
     @Override
     public String getDescription() {
-        return "Quenches your thirst.";
+        return "Quenches your thirst and restores your health.";
     }
 }

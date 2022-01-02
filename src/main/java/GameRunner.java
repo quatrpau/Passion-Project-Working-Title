@@ -17,9 +17,23 @@
 //story
 //better writing( make as descriptive as possible as player does not have visual element)
 //title
-public class GameRunner {
+public final class GameRunner {
     public static void main(String[] args) {
         //take command line args?
-        new Game().run();
+        new Thread(new Game()).start();
     }
 }
+
+
+//Sunday todo:
+//balance fights
+    //add machete to stats
+
+//global commands
+    //exit
+    //status
+    //inspect
+
+//3 days in desert
+    //randomize battles
+    //

@@ -13,12 +13,13 @@ public final class Player implements Being {
     private int speed;
     private int strength;
     private int hp;
-    private Inventory inventory;
+    private final Inventory inventory;
     private static final Player YOU = new Player();
     private Player(){
-        this.hp = 100;
-        this.strength = 100;
-        this.speed = 100;
+        //this.hp = 30;
+        this.hp = 5000;
+        this.strength = 15;
+        this.speed = 30;
         this.inventory = new Inventory();
     }
     @Override
@@ -40,15 +41,16 @@ public final class Player implements Being {
     public int getHp() {
         return Math.max(hp, 0);
     }
-
     @Override
     public int getSpeed() {
         return this.speed;
     }
+
     public static Player getYou(){
         return YOU;
     }
     public void setName(String name) { this.name = name;}
+    @Override
     public String getName(){ return this.name;}
     public Boolean hasItem(String item){
         return this.inventory.peek(item) != null;

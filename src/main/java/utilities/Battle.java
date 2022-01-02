@@ -3,13 +3,14 @@ package utilities;
 import models.Enemy;
 import models.Player;
 
+import java.util.Objects;
+
 //have better text options
-public class Battle {
-    private Enemy opponent;
-    private Display display= new Display();
+public final class Battle {
+    private final Enemy opponent;
     private final Player you = Player.getYou();
     private final Boolean result;
-    private static final String YOUR_TURN = "What will you do? \n 1.) Attack \n 2.) Surrender";
+    private static final String YOUR_TURN = "What will you do? \n 1.) Surrender \n 2.) Attack \n 3.) Block";
     public Battle(Enemy opponent) {
         this.opponent = opponent;
         this.result = this.start();
@@ -17,15 +18,17 @@ public class Battle {
     //chance of peace?
     public Boolean start(){
         boolean openToPeace = false;
-        //why is this statement redundant
-        int intraTurnCommunicationStation = 0;
-        int interTurnCommunicationStation = 0;
+        Turn intraTurnCommunicationStation;
+        Action actionStorage;
+        int magnitude;
+        Turn interTurnCommunicationStation = null;
         boolean firstTurn = true;
         //check if opponent and you are alive every turn
         while(opponent.isAlive() && you.isAlive() && !openToPeace){
             boolean playerGoesFirst = you.getSpeed() > opponent.getSpeed();
             if(firstTurn){
                 if(playerGoesFirst){
+                    //can these go inside each other
                     intraTurnCommunicationStation = playerTurn();
                     interTurnCommunicationStation = opponentTurn(intraTurnCommunicationStation);
                 }
@@ -45,7 +48,7 @@ public class Battle {
                     interTurnCommunicationStation = playerTurn(intraTurnCommunicationStation);
                 }
             }
-            if(intraTurnCommunicationStation == -1 && interTurnCommunicationStation == -1){
+            if(intraTurnCommunicationStation.getAction() == Action.SURRENDER && interTurnCommunicationStation.getAction() == Action.SURRENDER){
                 openToPeace = true;
             }
         }
@@ -55,96 +58,120 @@ public class Battle {
         return you.isAlive();
     }
     //1st Turns
-    private int playerTurn(){
-        display.print(YOUR_TURN);
-        if(InputTaker.getPlayerInput().equals("1")){
-            //fight
-            display.print("You throw a punch, but does it connect?");
-            return you.giveDamage();
-        }
-        else{
-            //surrender
-            display.print("You decide to surrender, but does your opponent accept?");
-            return -1;
-        }
-    }
-    private int opponentTurn(){
-        //decides to fight
-        if(opponent.decideTime()){
-            display.print("Your opponent attacks!");
-            return opponent.giveDamage();
-        }
-        //decides to surrender
-        else{
-            display.print("Your opponent attempts to surrender.");
-            return -1;
-        }
-    }
-    //All Other Turns
-    private int playerTurn(int countercode){
-        //battle has been won
-        if(countercode == -2){
-           return -2;
-        }
-        //surrender
-        if(countercode == -1){
-            display.print("Do you accept your opponent's surrender?(y/n)");
-            if(InputTaker.getYesOrNo()){
-                display.print("You accept and the battle ends.");
-                return -1;
+    private Turn playerTurn(){
+        Display.print(YOUR_TURN);
+        //exception handler?
+        Action actionStorage;
+        while(true){
+            if((actionStorage = getAction(InputTaker.getPlayerInput())) != null){
+                return new Turn(actionStorage, this.you);
             }
             else{
-                display.print("You deny the request with a vicious attack! (x2 Damage)");
-                return you.giveDamage() * 2;
+                Display.print("Invalid input: try again");
             }
         }
-        //miss
-        if(countercode == 0){
-            display.print("It misses.");
-            return playerTurn();
+    }
+    private Turn opponentTurn(){
+        Action actionStorage = getAction(String.valueOf(opponent.decideTime()));
+        switch(Objects.requireNonNull(actionStorage)){
+            case SURRENDER:
+                Display.print("Your opponent attempts to surrender.");
+                break;
+            case ATTACK:
+                Display.print("Your opponent attacks!");
+                break;
+            case BLOCK:
+                Display.print("Your opponent prepares to block");
+                break;
+        }
+        return new Turn(actionStorage,this.opponent);
+    }
+    //All Other Turns
+    private Turn playerTurn(Turn opponentTurn){
+        //battle has been won
+        if(opponentTurn.getAction() == Action.DEFER){
+            return new Turn(Action.DEFER,this.you);
+        }
+        if(opponentTurn.getAction() == Action.SURRENDER){
+            Display.print("Do you accept your opponent's surrender?(y/n)");
+            if(InputTaker.getYesOrNo()){
+                Display.print("You accept and the battle ends.");
+                return new Turn(Action.SURRENDER, this.you);
+            }
+            else{
+                Display.print("You deny the request with a vicious attack! (x2 Damage)");
+                return new Turn(Action.CHEAP_SHOT, this.you);
+            }
+        }
+        if(opponentTurn.getAction() == Action.BLOCK){
+            Turn returnal = playerTurn();
+            if(returnal.getAction() == Action.ATTACK){
+                returnal.setMagnitude(returnal.getMagnitude() / 2);
+            }
+            return returnal;
         }
         else{
             //print out toString of each being?
-            you.takeDamage(countercode);
-            display.print("You take damage! Your health is now " + you.getHp() + ".");
+            you.takeDamage(opponentTurn.getMagnitude());
+            Display.print("You take damage! Your health is now " + you.getHp() + ".");
             if(you.isAlive()){
                 return playerTurn();
             }
-            return -2;
+            return new Turn(Action.DEFER,this.you);
         }
     }
-    private int opponentTurn(int countercode){
-        //battle has been won
-        if(countercode == -2){
-            return -2;
+    private Turn opponentTurn(Turn playerTurn){
+        if(playerTurn.getAction() == Action.DEFER){
+            return new Turn(Action.DEFER, this.opponent);
         }
-        //surrender
-        if(countercode == -1){
-            if(opponent.decideTime()){
-                display.print("They accept and the battle ends.");
-                return -1;
+        if(playerTurn.getAction() == Action.SURRENDER){
+            if(opponent.surrenderDecision()){
+                Display.print("They accept and the battle ends.");
+                return new Turn(Action.SURRENDER, this.opponent);
             }
             else{
-                display.print("They deny your request with a vicious attack! (x2 Damage)");
-                return opponent.giveDamage() * 2;
+                Display.print("They deny your request with a vicious attack! (x2 Damage)");
+                return new Turn(Action.CHEAP_SHOT, this.opponent);
             }
         }
-        //miss
-        if(countercode == 0){
-            display.print("It does not land...");
-            return playerTurn();
+        if(playerTurn.getAction() == Action.BLOCK){
+            Turn returnal = opponentTurn();
+            if(returnal.getAction() == Action.ATTACK){
+                returnal.setMagnitude(returnal.getMagnitude() / 2);
+            }
+            return returnal;
         }
-        else{
+        else {
             //print out toString of each being?
-            opponent.takeDamage(countercode);
-            display.print("It lands successfully. Their health is now " + opponent.getHp() + ".");
-            if(opponent.isAlive()){
+            opponent.takeDamage(playerTurn.getMagnitude());
+            Display.print("It lands successfully. Their health is now " + opponent.getHp() + ".");
+            if (opponent.isAlive()) {
                 return opponentTurn();
             }
-            return -2;
+            return new Turn(Action.DEFER, this.opponent);
         }
     }
     public Boolean getResult(){
         return this.result;
     }
+    //can this functionality be put inside the enum?
+    private Action getAction(String choice) {
+        //maybe add check
+        switch(choice){
+            case "1":
+                return Action.SURRENDER;
+            case "2":
+                return Action.ATTACK;
+            case "3":
+                return Action.BLOCK;
+            default:
+                Display.print("Invalid choice: try again");
+                return null;
+        }
+    }
 }
+
+//block
+//attack
+//surrender
+//check

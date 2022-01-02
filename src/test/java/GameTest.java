@@ -1,16 +1,21 @@
 import interfaces.Item;
+import models.Enemy;
 import models.desert.Door;
 import models.desert.Rock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class RockTest {
+public class GameTest {
     @Test
     public void rockTest(){
         Item rock = new Rock();
         Door door = new Door();
-        //door.getAffected(rock);
         Assertions.assertTrue(rock instanceof Rock);
+    }
+    @Test
+    public void decideTimeTest(){
+        Enemy enemy = new Enemy("a",1,1,1);
+        //Assertions.assertTrue(enemy.decideTime());
     }
 }

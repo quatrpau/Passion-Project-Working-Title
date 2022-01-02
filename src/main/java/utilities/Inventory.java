@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 //maybe make item an abstract class to override imple of toString()
-public class Inventory {
+public final class Inventory {
     //checkInventory will print a string output of the contents
     HashMap<String, Item> inventory;
     public Inventory(){

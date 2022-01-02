@@ -8,7 +8,7 @@ import utilities.InputTaker;
 //have status accessible at any time (put this in the inputtaker class)
 import java.util.LinkedList;
 //singleton?
-public class Game implements Runnable {
+public final class Game implements Runnable {
     //private static final Game INSTANCE;
     //private Game(){}
     //initialize player in player class?
@@ -71,7 +71,6 @@ public class Game implements Runnable {
     //BEINGS
     //speaker
     //battleable
-
     //all environments are goable // ie start method
 
-    //
+//maybe add health edit to make sure health is always above 0

@@ -6,4 +6,5 @@ public interface Being {
     boolean isAlive();
     int getHp();
     int getSpeed();
+    String getName();
 }

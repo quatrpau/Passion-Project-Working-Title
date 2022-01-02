@@ -2,6 +2,9 @@ package models;
 
 import interfaces.Being;
 
+import java.util.Random;
+
+//replace with individual enemy classes
 public class Enemy implements Being {
     public String name;
     public int speed;
@@ -39,9 +42,19 @@ public class Enemy implements Being {
     public int getSpeed() {
         return this.speed;
     }
-    public boolean decideTime(){
-        //simple imple?
-        //50-50
-        return (Math.random() * (1 + 1) + 0) == 1;
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    public int decideTime(){
+        Random random = new Random();
+        return random.nextInt(3) + 1;
+    }
+    //give reward
+    public boolean surrenderDecision(){
+        Random random = new Random();
+        return random.nextBoolean();
     }
 }
