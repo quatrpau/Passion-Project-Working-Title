@@ -1,6 +1,5 @@
 package models;
 
-import interfaces.Being;
 import interfaces.Challenger;
 import interfaces.Item;
 
@@ -10,18 +9,18 @@ import java.util.Random;
 public class Enemy implements Challenger {
     public String name;
     public int speed;
-    public int strength;
+    public int damage;
     public int hp;
-    public Enemy(String name,int hp, int strength,int speed){
+    public Enemy(String name, int hp, int damage, int speed){
         this.name = name;
         this.hp = hp;
-        this.strength = strength;
+        this.damage = damage;
         this.speed = speed;
     }
     @Override
     public int giveDamage() {
         //have this depend on multiple values
-        return strength;
+        return damage;
     }
 
     @Override

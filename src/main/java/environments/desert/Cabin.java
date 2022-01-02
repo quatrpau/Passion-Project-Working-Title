@@ -1,5 +1,6 @@
 package environments.desert;
 
+import interfaces.Challenger;
 import interfaces.Environment;
 import models.Enemy;
 import models.Player;
@@ -19,7 +20,7 @@ public class Cabin implements Environment {
 
     @Override
     //battle with raccoon living in home?
-    public Battle triggerBattle(Enemy opponent) {
+    public Battle triggerBattle(Challenger opponent) {
         return null;
     }
 

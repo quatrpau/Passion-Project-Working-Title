@@ -55,7 +55,7 @@ public class CactusArea implements Environment {
                     keepGoing = false;
                 }
                 //use machete on cactus
-                else if(choice.equals("use machete on cactus"){
+                else if(choice.equals("use machete on cactus")){
                     if(Player.getYou().hasItem("machete")){
                         Boolean outcome = triggerBattle(this.cactus).getResult();
                         if (outcome == null) {

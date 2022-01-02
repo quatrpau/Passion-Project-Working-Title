@@ -1,6 +1,5 @@
 package models.desert;
 
-import interfaces.Being;
 import interfaces.Challenger;
 import interfaces.Item;
 
@@ -10,14 +9,14 @@ import java.util.Random;
 public class Cactus implements Challenger {
     private int hp = 100;
     private int speed = 20;
-    private int strength = 35;
+    private int damage = 35;
     private boolean inBattle = true;
     private final String normalText = "Just a normal cactus.";
     private final String battleText = "A cactus with nothing to lose.";
     private final String name = "Cactus";
     @Override
     public int giveDamage() {
-        return this.strength;
+        return this.damage;
     }
 
     @Override

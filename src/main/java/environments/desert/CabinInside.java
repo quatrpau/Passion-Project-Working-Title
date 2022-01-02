@@ -1,20 +1,20 @@
 package environments.desert;
 
+import interfaces.Challenger;
 import interfaces.Environment;
-import models.Enemy;
+import models.Player;
 import models.desert.Machete;
 import utilities.Battle;
 import utilities.Display;
 import utilities.InputTaker;
 
-import java.util.Locale;
 
 public class CabinInside implements Environment {
     private String flavorText = "You enter the cabin, inside you see it is empty except for a machete sitting in the middle of the floor.";
     private Machete machete = new Machete();
     private Boolean macheteGot = false;
     @Override
-    public Battle triggerBattle(Enemy opponent) {
+    public Battle triggerBattle(Challenger opponent) {
         return null;
     }
 
@@ -39,7 +39,11 @@ public class CabinInside implements Environment {
                 if(choice.equals("get machete")){
                     if(!macheteGot){
                         Display.print("Got the machete!");
+                        Player.getYou().addToInventory(new Machete());
+                        Player.getYou().addDamage(Machete.getDamageIncrease());
+                        Display.print("Your damage increased by 100!");
                         macheteGot = true;
+                        setFlavorText("Nothing is left...");
                     }
                     else{
                         Display.print("There is no machete...");

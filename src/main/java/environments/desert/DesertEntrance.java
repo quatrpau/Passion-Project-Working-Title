@@ -1,5 +1,6 @@
 //make this text yellow
 package environments.desert;
+import interfaces.Challenger;
 import interfaces.Environment;
 import models.Enemy;
 import models.desert.DesertGuide;
@@ -7,7 +8,6 @@ import utilities.Battle;
 import utilities.Display;
 import utilities.InputTaker;
 //GO BACK (but not when deep in desert) (or at home text)
-//divide desert by half days or days? (should be reflected in text descriptor)
 public class DesertEntrance implements Environment {
     //should i have a map or a list of surroundingsStrings
     private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow-Orange Desert\". A desolate place stretching as far as the eye can see.\n"
@@ -33,7 +33,7 @@ public class DesertEntrance implements Environment {
         //maybe edit cabinOutside to cabinInside
 
     @Override
-    public Battle triggerBattle(Enemy opponent) {
+    public Battle triggerBattle(Challenger opponent) {
         return null;
     }
 
@@ -71,6 +71,10 @@ public class DesertEntrance implements Environment {
                     if(keepGoing) giveFlavorText();
                 }
                 //if desert
+                else if(decision.equals("go desert")){
+                    crossedDesert = desert.start();
+                    keepGoing = false;
+                }
                 //reprint (look around)
             }
             else{
@@ -92,18 +96,14 @@ public class DesertEntrance implements Environment {
         else if(raw.equals("go cactus")){
             return "go cactus";
         }
+        else if(raw.equals("go desert") || raw.equals("enter desert")){
+            return "go desert";
+        }
         else{
             return null;
         }
     }
 }
-//desert enemies
-    //snake
-    //giant scorpion
-    //vulture
-
 //implement monetary system? //must find way to make money
-
-
 
 //reprint desc if they come from another area

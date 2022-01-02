@@ -5,26 +5,26 @@ import interfaces.Item;
 import utilities.Inventory;
 
 public final class Player implements Being {
-    //strength
+    //damage
     //vitality
     //speed
     //hp
     private String name;
     private int speed;
-    private int strength;
+    private int damage;
     private int hp;
     private final Inventory inventory;
     private static final Player YOU = new Player();
     private Player(){
         //this.hp = 30;
         this.hp = 5000;
-        this.strength = 15;
+        this.damage = 15;
         this.speed = 30;
         this.inventory = new Inventory();
     }
     @Override
     public int giveDamage() {
-        return strength;
+        return damage;
         //crit hits?
     }
     @Override
@@ -32,7 +32,6 @@ public final class Player implements Being {
         this.hp -= amt;
         //maybe check isAlive here and return boolean?
     }
-
     @Override
     public boolean isAlive() {
         return hp > 0;
@@ -45,7 +44,9 @@ public final class Player implements Being {
     public int getSpeed() {
         return this.speed;
     }
-
+    public void addDamage(int increase){
+        this.damage += increase;
+    }
     public static Player getYou(){
         return YOU;
     }

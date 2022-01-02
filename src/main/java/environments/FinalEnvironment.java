@@ -1,5 +1,6 @@
 package environments;
 
+import interfaces.Challenger;
 import interfaces.Environment;
 import models.Enemy;
 import utilities.Battle;
@@ -10,7 +11,7 @@ public class FinalEnvironment implements Environment {
     private String flavorText = "You see a dragon up ahead. Will you fight him?(y/n)";
     //return string instead?
     @Override
-    public Battle triggerBattle(Enemy opponent) {
+    public Battle triggerBattle(Challenger opponent) {
         return new Battle(opponent);
     }
 
