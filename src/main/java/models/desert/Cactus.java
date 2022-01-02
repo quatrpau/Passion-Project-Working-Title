@@ -2,7 +2,7 @@ package models.desert;
 
 import interfaces.Being;
 
-//interface for flavor text? //ie describable
+//cactus fight
 public class Cactus implements Being {
     @Override
     public int giveDamage() {

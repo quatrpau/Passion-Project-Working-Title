@@ -13,6 +13,7 @@ import utilities.InputTaker;
 public class Cabin implements Environment {
     //private boolean inside = false;
     private Door door = new Door();
+    private CabinInside inside = new CabinInside();
     private String flavorText = "You approach the cabin. It seems to have been abandoned for quite some time. \n" +
             "The only point of entry is a metal door.";
 
@@ -62,6 +63,14 @@ public class Cabin implements Environment {
                 else if(choice.equals("go back")){
                     keepGoing = false;
                 }
+                else if(choice.equals("enter")){
+                    if(door.isOpen()){
+                        inside.start();
+                    }
+                    else{
+                        Display.print("The door is locked!");
+                    }
+                }
             }
             else{
                 Display.print("Invalid input: try again.");
@@ -78,6 +87,9 @@ public class Cabin implements Environment {
         }
         else if(raw.equals("leave") || raw.equals("go back")){
             return "go back";
+        }
+        else if(raw.equals("enter cabin") || raw.equals("enter") || raw.equals("enter door")){
+            return "enter";
         }
         else{
             return null;

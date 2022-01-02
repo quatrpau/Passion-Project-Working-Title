@@ -6,7 +6,8 @@ import models.Player;
 import java.util.Locale;
 
 public class Door implements Affectable<Rock> {
-    private String flavorText;
+    private String flavorText = "Upon closer inspection, you see that the door is locked," +
+            "\n but the lock is very rusty and could be forced open.";
     private boolean open = false;
     @Override
     public Boolean getAffected(Rock catalyst) {
