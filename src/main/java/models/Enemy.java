@@ -1,11 +1,13 @@
 package models;
 
 import interfaces.Being;
+import interfaces.Challenger;
+import interfaces.Item;
 
 import java.util.Random;
 
 //replace with individual enemy classes
-public class Enemy implements Being {
+public class Enemy implements Challenger {
     public String name;
     public int speed;
     public int strength;
@@ -47,14 +49,19 @@ public class Enemy implements Being {
     public String getName() {
         return this.name;
     }
-
+    @Override
     public int decideTime(){
         Random random = new Random();
         return random.nextInt(3) + 1;
     }
-    //give reward
+    @Override
     public boolean surrenderDecision(){
         Random random = new Random();
         return random.nextBoolean();
+    }
+
+    @Override
+    public Item giveReward() {
+        return null;
     }
 }

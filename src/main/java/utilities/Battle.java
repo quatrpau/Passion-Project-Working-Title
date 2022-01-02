@@ -1,5 +1,6 @@
 package utilities;
 
+import interfaces.Challenger;
 import models.Enemy;
 import models.Player;
 
@@ -7,11 +8,11 @@ import java.util.Objects;
 
 //have better text options
 public final class Battle {
-    private final Enemy opponent;
+    private final Challenger opponent;
     private final Player you = Player.getYou();
     private final Boolean result;
     private static final String YOUR_TURN = "What will you do? \n 1.) Surrender \n 2.) Attack \n 3.) Block";
-    public Battle(Enemy opponent) {
+    public Battle(Challenger opponent) {
         this.opponent = opponent;
         this.result = this.start();
     }

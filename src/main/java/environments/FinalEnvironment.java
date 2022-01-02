@@ -33,7 +33,7 @@ public class FinalEnvironment implements Environment {
                 Boolean outcome = triggerBattle(new Enemy("Dragon", 200, 200, 200)).getResult();
                 if (outcome == null) {
                     //maybe something better here?
-                    Display.print("Peace has been achieved");
+                    Display.print("Peace has been achieved.");
                     //may return null here
                     return true;
                 } else if (outcome) {
