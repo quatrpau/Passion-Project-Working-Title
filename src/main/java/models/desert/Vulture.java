@@ -43,6 +43,7 @@ public class Vulture implements Challenger {
 
     @Override
     public Item giveReward() {
+        Feather.statIncrease();
         return new Feather();
     }
 

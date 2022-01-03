@@ -2,6 +2,7 @@ package environments.desert;
 
 import interfaces.Challenger;
 import interfaces.Environment;
+import models.Player;
 import models.desert.GiantScorpion;
 import models.desert.Snake;
 import models.desert.Vulture;
@@ -44,14 +45,15 @@ public class Desert implements Environment {
             if((decision = inputRepair(InputTaker.getPlayerInput())) != null) {
                 if(decision.equals("go north")){
                     if(Boolean.TRUE.equals(battleChanceCalculator())){
-                        Boolean outcome = triggerBattle(opponentSelector()).getResult();//vary opponent (have 3 different kinds)
+                        Challenger opponent = opponentSelector();
+                        Boolean outcome = triggerBattle(opponent).getResult();//vary opponent (have 3 different kinds)
                         if(outcome == null){
                             Display.print("You reached an agreement"); //reward?
                             day++;
                         }
                         else if(outcome){
                             Display.print("You won!");
-
+                            Player.getYou().addToInventory(opponent.giveReward());
                             day++;
                         }
                         else{

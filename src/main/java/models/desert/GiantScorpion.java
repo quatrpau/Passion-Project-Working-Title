@@ -43,6 +43,7 @@ public class GiantScorpion implements Challenger {
 
     @Override
     public Item giveReward() {
+        Venom.statIncrease();
         return new Venom();
     }
 
@@ -55,6 +56,9 @@ public class GiantScorpion implements Challenger {
 
     @Override
     public boolean surrenderDecision() {
+        if(hp > 30){
+            return false;
+        }
         Random random = new Random();
         return random.nextBoolean();
     }

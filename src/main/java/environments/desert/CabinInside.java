@@ -39,8 +39,6 @@ public class CabinInside implements Environment {
                     if(!macheteGot){
                         Display.print("Got the machete!");
                         Player.getYou().addToInventory(new Machete());
-                        Player.getYou().addDamage(Machete.getDamageIncrease());
-                        Display.print("Your damage increased by 100!");
                         macheteGot = true;
                         setFlavorText("Nothing is left...");
                     }

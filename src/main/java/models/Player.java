@@ -14,11 +14,12 @@ public final class Player implements Being {
     private int speed;
     private int damage;
     private int hp;
+    private int maxHp;
     private final Inventory inventory;
     private static final Player YOU = new Player();
     private Player(){
-        //this.hp = 30;
-        this.hp = 5000;
+        this.maxHp = 30;
+        this.hp = 30;
         this.damage = 15;
         this.speed = 30;
         this.inventory = new Inventory();
@@ -48,6 +49,8 @@ public final class Player implements Being {
     public void addDamage(int increase){
         this.damage += increase;
     }
+    public void addMaxHp(int increase) {this.maxHp += increase;}
+    public void addSpeed(int increase) {this.speed += increase;}
     public static Player getYou(){
         return YOU;
     }

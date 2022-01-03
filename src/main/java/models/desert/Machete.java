@@ -1,6 +1,8 @@
 package models.desert;
 
 import interfaces.Item;
+import models.Player;
+import utilities.Display;
 
 public class Machete implements Item {
 
@@ -11,10 +13,11 @@ public class Machete implements Item {
 
     @Override
     public String getDescription() {
-        return "A bit rusty, but still does the job.";
+        return "A bit rusty, but still does the job. Increases damage by 100.";
     }
 
-    public static int getDamageIncrease(){
-        return 100;
+    public void statIncrease(){
+        Display.print("Increased damage by 100.");
+        Player.getYou().addDamage(100);
     }
 }

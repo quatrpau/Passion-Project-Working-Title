@@ -43,6 +43,7 @@ public class Snake implements Challenger {
 
     @Override
     public Item giveReward() {
+        Snakeskin.statIncrease();
         return new Snakeskin();
     }
 
