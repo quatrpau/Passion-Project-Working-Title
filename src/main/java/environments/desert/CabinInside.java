@@ -11,7 +11,6 @@ import utilities.InputTaker;
 
 public class CabinInside implements Environment {
     private String flavorText = "You enter the cabin, inside you see it is empty except for a machete sitting in the middle of the floor.";
-    private Machete machete = new Machete();
     private Boolean macheteGot = false;
     @Override
     public Battle triggerBattle(Challenger opponent) {
@@ -52,6 +51,9 @@ public class CabinInside implements Environment {
                 else if(choice.equals("go back")){
                     keepGoing = false;
                 }
+                else if(choice.equals("look")){
+                    giveFlavorText();
+                }
             }
             else{
                 Display.print("Invalid input: try again.");
@@ -65,6 +67,9 @@ public class CabinInside implements Environment {
         }
         if(raw.equals("leave") || raw.equals("go back")){
             return "go back";
+        }
+        if(raw.equals("look around") || raw.equals("look")){
+            return "look";
         }
         else{
             return null;

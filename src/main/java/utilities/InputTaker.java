@@ -1,8 +1,9 @@
 package utilities;
 
+import models.Player;
+
 import java.util.Locale;
 import java.util.Scanner;
-//make functions static?
 public final class InputTaker {
     private static final Scanner inputTaker = new Scanner(System.in);
     public static String getPlayerInput(){
@@ -12,20 +13,32 @@ public final class InputTaker {
         return inputTaker.nextLine();
     }
     //translate player input here
-    //how to boot player back out?
-    private static boolean yesOrNo(String input){
+    private static Boolean yesOrNo(String input){
         switch(input.toLowerCase(Locale.ROOT)){
             case "y": case "yes":
                 return true;
             case "n": case "no":
                 return false;
             default:
-                System.out.println("what?");
-                return false;
+                Display.print("what?");
+                return null;
         }
     }
+    private static Boolean isPlayerCommand(String input){
+        input = input.toLowerCase(Locale.ROOT);
+        if (input.equals("status") || input.equals("stats"){
+            Player.getYou().statusUpdate();
+            return true;
+        }
+        String[] wordar = input.split(" ");
+        if(wordar.length == 2 && (wordar[0].equals("check") || wordar[0].equals("look")){
+            Player.getYou().describeItem(wordar[1]);
+            return true;
+        }
+
+    }
     public static boolean getYesOrNo(){
-        return yesOrNo(getPlayerInput());
+        return Boolean.TRUE.equals(yesOrNo(getPlayerInput()));
     }
     //global verb check (status, stat, inventory, //look around, //exit)
 }

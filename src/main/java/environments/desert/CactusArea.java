@@ -80,8 +80,23 @@ public class CactusArea implements Environment {
                     }
                 }
                 //use rock on cactus
+                else if(choice.equals("use rock on cactus")){
+                    if(Player.getYou().hasItem("rock")){
+                        Display.print("You try and hit the cactus with the rock but it just bounces off.\n" +
+                                "Looks like you'll need something else.");
+                    }
+                    else{
+                        Display.print("You don't have the rock");
+                    }
+                }
                 //repeat
-                //confused
+                else if(choice.equals("look")){
+                    giveFlavorText();
+                }
+
+            }
+            else{
+                Display.print("Invalid input: try again.");
             }
         }
         return true;
@@ -90,11 +105,17 @@ public class CactusArea implements Environment {
         if(raw.equals("take rock") || raw.equals("get rock")){
             return "take rock";
         }
-        else if(raw.equals("go back")){
+        else if(raw.equals("go back") || raw.equals("leave") || raw.equals("exit")){
             return "go back";
         }
         else if(raw.equals("use machete on cactus")){
             return "use machete on cactus";
+        }
+        else if(raw.equals("use rock on cactus")){
+            return "use rock on cactus";
+        }
+        else if(raw.equals("look around") || raw.equals("look")){
+            return "look";
         }
         else{
             return null;

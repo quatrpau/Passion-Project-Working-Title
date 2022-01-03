@@ -2,7 +2,6 @@ package environments.desert;
 
 import interfaces.Challenger;
 import interfaces.Environment;
-import models.Enemy;
 import models.desert.GiantScorpion;
 import models.desert.Snake;
 import models.desert.Vulture;
@@ -115,7 +114,7 @@ public class Desert implements Environment {
         else if(raw.equals("go south")){
             return "go south";
         }
-        else if(raw.equals("look around")){
+        else if(raw.equals("look around") || raw.equals("look")){
             return "look around";
         }
         else{

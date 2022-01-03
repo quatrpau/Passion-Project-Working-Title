@@ -72,6 +72,9 @@ public class Cabin implements Environment {
                         Display.print("The door is locked!");
                     }
                 }
+                else if(choice.equals("look")){
+                    giveFlavorText();
+                }
             }
             else{
                 Display.print("Invalid input: try again.");
@@ -86,11 +89,15 @@ public class Cabin implements Environment {
         else if(raw.equals("use rock on door")){
             return "use rock on door";
         }
-        else if(raw.equals("leave") || raw.equals("go back")){
+        else if(raw.equals("leave") || raw.equals("go back") || raw.equals("exit")){
             return "go back";
         }
-        else if(raw.equals("enter cabin") || raw.equals("enter") || raw.equals("enter door")){
+        else if(raw.equals("enter cabin") || raw.equals("enter") || raw.equals("enter door")
+        || raw.equals("use door")){
             return "enter";
+        }
+        else if(raw.equals("look") || raw.equals("look around")){
+            return "look";
         }
         else{
             return null;

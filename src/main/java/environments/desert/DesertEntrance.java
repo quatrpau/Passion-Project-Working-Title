@@ -2,7 +2,6 @@
 package environments.desert;
 import interfaces.Challenger;
 import interfaces.Environment;
-import models.Enemy;
 import models.desert.DesertGuide;
 import utilities.Battle;
 import utilities.Display;
@@ -76,6 +75,9 @@ public class DesertEntrance implements Environment {
                     keepGoing = false;
                 }
                 //reprint (look around)
+                else if(decision.equals("look")){
+                    giveFlavorText();
+                }
             }
             else{
                 Display.print("Invalid input: try again");
@@ -98,6 +100,9 @@ public class DesertEntrance implements Environment {
         }
         else if(raw.equals("go desert") || raw.equals("enter desert")){
             return "go desert";
+        }
+        else if(raw.equals("look around") || raw.equals("look")){
+            return "look";
         }
         else{
             return null;
