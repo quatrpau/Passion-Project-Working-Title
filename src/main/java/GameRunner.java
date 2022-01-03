@@ -27,3 +27,4 @@ public final class GameRunner {
 
 //Monday todo:
 //have waterbottle and cactus flesh restore health and also disappear from inventory
+//have colored terminal
