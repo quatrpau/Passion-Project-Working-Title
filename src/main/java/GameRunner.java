@@ -1,6 +1,5 @@
 //TODO
 //finish second environment
-//items in general & stat changing items (enum for flavor text?)
 //puzzles
 //implement verb system on game class
     //maybe add interfaces for each verb
@@ -28,3 +27,4 @@ public final class GameRunner {
 //Monday todo:
 //have waterbottle and cactus flesh restore health and also disappear from inventory
 //have colored terminal
+//add help command
