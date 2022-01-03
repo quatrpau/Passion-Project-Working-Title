@@ -51,15 +51,37 @@ public class GiantScorpion implements Challenger {
     public int decideTime() {
         //favors attack
         Random random = new Random();
-        return random.nextInt(3) + 1;
+        int rando = random.nextInt(100) + 1;
+        if(hp > 30){
+            if(rando <= 60 ){
+                return 2;
+            }
+            else{
+                return 3;
+            }
+        }
+        else{
+            if(rando <= 33){
+                return 1;
+            }
+            else if(rando <= 88){
+                return 2;
+            }
+            else{
+                return 3;
+            }
+        }
     }
 
     @Override
     public boolean surrenderDecision() {
-        if(hp > 30){
+        Random random = new Random();
+        if(hp > 50){
             return false;
         }
-        Random random = new Random();
+        else if(hp < 25){
+            return true;
+        }
         return random.nextBoolean();
     }
 }

@@ -51,13 +51,38 @@ public class Vulture implements Challenger {
     public int decideTime() {
         //has no preference
         Random random = new Random();
-        return random.nextInt(3) + 1;
+        int rando = random.nextInt(100) + 1;
+        if(hp > 30){
+            if(rando >= 25 ){
+                return 2;
+            }
+            else{
+                return 3;
+            }
+        }
+        else{
+            if(rando <= 33){
+                return 1;
+            }
+            else if(rando <= 88){
+                return 3;
+            }
+            else{
+                return 2;
+            }
+        }
     }
 
     @Override
     public boolean surrenderDecision() {
         //no chance of surrender until lower
         Random random = new Random();
+        if(hp > 50){
+            return false;
+        }
+        else if(hp < 15){
+            return true;
+        }
         return random.nextBoolean();
     }
 }

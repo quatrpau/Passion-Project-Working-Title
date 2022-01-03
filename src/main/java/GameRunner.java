@@ -25,15 +25,6 @@ public final class GameRunner {
 }
 
 
-//Sunday todo:
-//balance fights
-    //add machete to stats
-
-//global commands
-    //exit
-    //status
-    //inspect
-
+//Monday todo:
 //3 days in desert
-    //randomize battles
-    //
+    //update each enemies' decide times to allow for less or no surrender and more a
