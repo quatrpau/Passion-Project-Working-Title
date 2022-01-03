@@ -2,7 +2,8 @@ import environments.FinalEnvironment;
 import environments.desert.DesertEntrance;
 import interfaces.Environment;
 import models.Player;
-import utilities.Display;
+import utilities.AnsiColor;
+import utilities.IOConsole;
 import utilities.InputTaker;
 
 //have status accessible at any time (put this in the inputtaker class)
@@ -12,6 +13,7 @@ public final class Game implements Runnable {
     //private static final Game INSTANCE;
     //private Game(){}
     //initialize player in player class?
+    private IOConsole console = new IOConsole(AnsiColor.WHITE);
     public Player player;
     private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
@@ -21,10 +23,10 @@ public final class Game implements Runnable {
     public Game(){
         //create new Player;
         this.player = Player.getYou();
-        Display.print("What's your name?");
+        console.println("What's your name?");
         player.setName(InputTaker.getPlayerName());
-        Display.print("Your name is now: " + player.getName() + ". Welcome!");
-        Display.print("If this is your first time playing, try typing \"help\" to get information on available commands.\n");
+        console.println("Your name is now: " + player.getName() + ". Welcome!");
+        console.println("If this is your first time playing, try typing \"help\" to get information on available commands.\n");
         //add all environments
         environments.add(new DesertEntrance());
         environments.add(new FinalEnvironment());
@@ -38,7 +40,7 @@ public final class Game implements Runnable {
         while(keepGoing && currentEnvironment < environments.size()){
             Boolean playerSurvived = environments.get(currentEnvironment).start();
             if(!playerSurvived){
-                Display.print("GAME OVER. Retry?(y/n)");
+                IOConsole.printlin("GAME OVER. Retry?(y/n)");
                 keepGoing = InputTaker.getYesOrNo();
             }
             else{

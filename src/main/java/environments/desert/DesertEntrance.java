@@ -4,12 +4,12 @@ import interfaces.Challenger;
 import interfaces.Environment;
 import models.desert.DesertGuide;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 //GO BACK (but not when deep in desert) (or at home text)
 public class DesertEntrance implements Environment {
     //should i have a map or a list of surroundingsStrings
-    private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow-Orange Desert\". A desolate place stretching as far as the eye can see.\n"
+    private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow Desert\". A desolate place stretching as far as the eye can see.\n"
             + "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\".\n" +
             "To your right, you see an abandoned cabin. To your left, a lone cactus." ;
     //GO CABIN // GO RIGHT // RIGHT // MOVE RIGHT // CABIN //
@@ -38,8 +38,8 @@ public class DesertEntrance implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
-        Display.print("What will you do?");
+        IOConsole.printlin(flavorText);
+        IOConsole.printlin("What will you do?");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DesertEntrance implements Environment {
                 }
             }
             else{
-                Display.print("Invalid input: try again");
+                IOConsole.printlin("Invalid input: try again");
             }
         }
         if(crossedDesert){

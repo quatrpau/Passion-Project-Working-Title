@@ -4,8 +4,9 @@ import interfaces.Challenger;
 import interfaces.Environment;
 import models.Player;
 import models.desert.Machete;
+import utilities.AnsiColor;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 
 
@@ -19,8 +20,8 @@ public class CabinInside implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
-        Display.print("What will you do?");
+        IOConsole.printlin(flavorText);
+        IOConsole.printlin("What will you do?");
     }
 
     @Override
@@ -37,13 +38,13 @@ public class CabinInside implements Environment {
             if ((choice = inputRepair(InputTaker.getPlayerInput())) != null) {
                 if(choice.equals("get machete")){
                     if(!macheteGot){
-                        Display.print("Got the machete!");
+                        IOConsole.printlin("Got the machete!");
                         Player.getYou().addToInventory(new Machete());
                         macheteGot = true;
                         setFlavorText("Nothing is left...");
                     }
                     else{
-                        Display.print("There is no machete...");
+                        IOConsole.printlin("There is no machete...");
                     }
                 }
                 else if(choice.equals("go back")){
@@ -54,7 +55,7 @@ public class CabinInside implements Environment {
                 }
             }
             else{
-                Display.print("Invalid input: try again.");
+                IOConsole.printlin("Invalid input: try again.");
             }
         }
         return true;

@@ -2,7 +2,7 @@ package models;
 
 import interfaces.Being;
 import interfaces.Item;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.Inventory;
 
 public final class Player implements Being {
@@ -70,20 +70,20 @@ public final class Player implements Being {
     }
     //statusUpdate will print of string output of players current inventory and stats and name
     public void statusUpdate(){
-        Display.print(this.name + ": ");
-        Display.print("Speed: " + this.speed);
-        Display.print("Damage: " + this.damage);
-        Display.print("HP: " + this.hp);
-        Display.print(this.inventory.toString());
+        IOConsole.printlin(this.name + ": ");
+        IOConsole.printlin("Speed: " + this.speed);
+        IOConsole.printlin("Damage: " + this.damage);
+        IOConsole.printlin("HP: " + this.hp);
+        IOConsole.printlin(this.inventory.toString());
     }
     //describe item
     public void describeItem(String item){
         Item output = inventory.peek(item);
         if(output == null){
-            Display.print("You do not have" + item + ".");
+            IOConsole.printlin("You do not have" + item + ".");
         }
-        Display.print("Name: " + output.getName());
-        Display.print("Description: " + output.getDescription());
+        IOConsole.printlin("Name: " + output.getName());
+        IOConsole.printlin("Description: " + output.getDescription());
 
     }
 

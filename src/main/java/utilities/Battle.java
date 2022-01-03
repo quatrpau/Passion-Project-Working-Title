@@ -1,7 +1,6 @@
 package utilities;
 
 import interfaces.Challenger;
-import models.Enemy;
 import models.Player;
 
 import java.util.Objects;
@@ -60,7 +59,7 @@ public final class Battle {
     }
     //1st Turns
     private Turn playerTurn(){
-        Display.print(YOUR_TURN);
+        IOConsole.printlin(YOUR_TURN);
         //exception handler?
         Action actionStorage;
         while(true){
@@ -68,7 +67,7 @@ public final class Battle {
                 return new Turn(actionStorage, this.you);
             }
             else{
-                Display.print("Invalid input: try again");
+                IOConsole.printlin("Invalid input: try again");
             }
         }
     }
@@ -76,13 +75,13 @@ public final class Battle {
         Action actionStorage = getAction(String.valueOf(opponent.decideTime()));
         switch(Objects.requireNonNull(actionStorage)){
             case SURRENDER:
-                Display.print("Your opponent attempts to surrender.");
+                IOConsole.printlin("Your opponent attempts to surrender.");
                 break;
             case ATTACK:
-                Display.print("Your opponent attacks!");
+                IOConsole.printlin("Your opponent attacks!");
                 break;
             case BLOCK:
-                Display.print("Your opponent prepares to block");
+                IOConsole.printlin("Your opponent prepares to block");
                 break;
         }
         return new Turn(actionStorage,this.opponent);
@@ -94,13 +93,13 @@ public final class Battle {
             return new Turn(Action.DEFER,this.you);
         }
         if(opponentTurn.getAction() == Action.SURRENDER){
-            Display.print("Do you accept your opponent's surrender?(y/n)");
+            IOConsole.printlin("Do you accept your opponent's surrender?(y/n)");
             if(InputTaker.getYesOrNo()){
-                Display.print("You accept and the battle ends.");
+                IOConsole.printlin("You accept and the battle ends.");
                 return new Turn(Action.SURRENDER, this.you);
             }
             else{
-                Display.print("You deny the request with a vicious attack! (x2 Damage)");
+                IOConsole.printlin("You deny the request with a vicious attack! (x2 Damage)");
                 return new Turn(Action.CHEAP_SHOT, this.you);
             }
         }
@@ -114,7 +113,7 @@ public final class Battle {
         else{
             //print out toString of each being?
             you.takeDamage(opponentTurn.getMagnitude());
-            Display.print("You take damage! Your health is now " + you.getHp() + ".");
+            IOConsole.printlin("You take damage! Your health is now " + you.getHp() + ".");
             if(you.isAlive()){
                 return playerTurn();
             }
@@ -127,11 +126,11 @@ public final class Battle {
         }
         if(playerTurn.getAction() == Action.SURRENDER){
             if(opponent.surrenderDecision()){
-                Display.print("They accept and the battle ends.");
+                IOConsole.printlin("They accept and the battle ends.");
                 return new Turn(Action.SURRENDER, this.opponent);
             }
             else{
-                Display.print("They deny your request with a vicious attack! (x2 Damage)");
+                IOConsole.printlin("They deny your request with a vicious attack! (x2 Damage)");
                 return new Turn(Action.CHEAP_SHOT, this.opponent);
             }
         }
@@ -145,7 +144,7 @@ public final class Battle {
         else {
             //print out toString of each being?
             opponent.takeDamage(playerTurn.getMagnitude());
-            Display.print("It lands successfully. Their health is now " + opponent.getHp() + ".");
+            IOConsole.printlin("It lands successfully. Their health is now " + opponent.getHp() + ".");
             if (opponent.isAlive()) {
                 return opponentTurn();
             }
@@ -166,7 +165,7 @@ public final class Battle {
             case "3":
                 return Action.BLOCK;
             default:
-                Display.print("Invalid choice: try again");
+                IOConsole.printlin("Invalid choice: try again");
                 return null;
         }
     }

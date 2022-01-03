@@ -4,7 +4,7 @@ import interfaces.Challenger;
 import interfaces.Environment;
 import models.Enemy;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 //maybe have option to talk to dragon before battle
 public class FinalEnvironment implements Environment {
@@ -17,7 +17,7 @@ public class FinalEnvironment implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
+        IOConsole.printlin(flavorText);
     }
 
     @Override
@@ -34,11 +34,11 @@ public class FinalEnvironment implements Environment {
                 Boolean outcome = triggerBattle(new Enemy("Dragon", 200, 200, 200)).getResult();
                 if (outcome == null) {
                     //maybe something better here?
-                    Display.print("Peace has been achieved.");
+                    IOConsole.printlin("Peace has been achieved.");
                     //may return null here
                     return true;
                 } else if (outcome) {
-                    Display.print("You won");
+                    IOConsole.printlin("You won");
                     return true;
                 } else {
                     //game over screen?
@@ -48,13 +48,13 @@ public class FinalEnvironment implements Environment {
             else if(!warningShot){
                 //do not allow dragon to surrender on first turn OR
                 //do not allow dragon to surrender at all
-                Display.print("You turn around and attempt to flee but a wall of flames quickly blocks your path, narrowly missing you.");
+                IOConsole.printlin("You turn around and attempt to flee but a wall of flames quickly blocks your path, narrowly missing you.");
                 warningShot = true;
             }
             else{
-                Display.print("Are you sure?(y/n)");
+                IOConsole.printlin("Are you sure?(y/n)");
                 if(InputTaker.getYesOrNo()){
-                    Display.print("Undeterred, you try to flee again, this time at a full sprint! \n" +
+                    IOConsole.printlin("Undeterred, you try to flee again, this time at a full sprint! \n" +
                             "Unfortunately, the flames have not yet dissipated and you are quickly burnt to a crisp.");
                     hasEscaped = true;
                 }

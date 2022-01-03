@@ -2,7 +2,7 @@ package models.desert;
 
 import interfaces.Item;
 import models.Player;
-import utilities.Display;
+import utilities.IOConsole;
 
 public class Machete implements Item {
 
@@ -17,7 +17,7 @@ public class Machete implements Item {
     }
 
     public void statIncrease(){
-        Display.print("Increased damage by 100.");
+        IOConsole.printlin("Increased damage by 100.");
         Player.getYou().addDamage(100);
     }
 }

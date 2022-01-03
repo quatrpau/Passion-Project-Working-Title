@@ -7,7 +7,7 @@ import models.desert.Cactus;
 import models.desert.Rock;
 import models.desert.WaterBottle;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 //remove get flavor text replace with toString();
 public class CactusArea implements Environment {
@@ -24,7 +24,7 @@ public class CactusArea implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
+        IOConsole.printlin(flavorText);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CactusArea implements Environment {
     @Override
     public Boolean start() {
         giveFlavorText();
-        Display.print("What will you do?");
+        IOConsole.printlin("What will you do?");
         boolean keepGoing = true;
         while(keepGoing) {
             String choice;
@@ -48,7 +48,7 @@ public class CactusArea implements Environment {
                 if (choice.equals("take rock") && !rockIsGone) {
                     Player.getYou().addToInventory(new Rock());
                     setFlavorText("You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that.");
-                    Display.print("Got the rock!");
+                    IOConsole.printlin("Got the rock!");
                     rockIsGone = true;
                 }
                 else if(choice.equals("go back")){
@@ -60,14 +60,14 @@ public class CactusArea implements Environment {
                         Boolean outcome = triggerBattle(this.cactus).getResult();
                         if (outcome == null) {
                             //something better here//cactus gives you water or something
-                            Display.print("You came to an agreement.");
+                            IOConsole.printlin("You came to an agreement.");
                             //may return null here
-                            Display.print("You got a water bottle!");
+                            IOConsole.printlin("You got a water bottle!");
                             Player.getYou().addToInventory(new WaterBottle());
                         } else if (outcome) {
-                            Display.print("You defeated the cactus.");
+                            IOConsole.printlin("You defeated the cactus.");
                             cactusCutDown = true;
-                            Display.print("You got the cactus flesh!");
+                            IOConsole.printlin("You got the cactus flesh!");
                             this.setFlavorText("The stump of a once-prominent cactus.");
                             Player.getYou().addToInventory(cactus.giveReward());
                         } else {
@@ -76,17 +76,17 @@ public class CactusArea implements Environment {
                         }
                     }
                     else{
-                        Display.print("You don't have the machete.");
+                        IOConsole.printlin("You don't have the machete.");
                     }
                 }
                 //use rock on cactus
                 else if(choice.equals("use rock on cactus")){
                     if(Player.getYou().hasItem("rock")){
-                        Display.print("You try and hit the cactus with the rock but it just bounces off.\n" +
+                        IOConsole.printlin("You try and hit the cactus with the rock but it just bounces off.\n" +
                                 "Looks like you'll need something else.");
                     }
                     else{
-                        Display.print("You don't have the rock");
+                        IOConsole.printlin("You don't have the rock");
                     }
                 }
                 //repeat
@@ -96,7 +96,7 @@ public class CactusArea implements Environment {
 
             }
             else{
-                Display.print("Invalid input: try again.");
+                IOConsole.printlin("Invalid input: try again.");
             }
         }
         return true;

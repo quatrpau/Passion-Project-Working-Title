@@ -2,12 +2,12 @@ package environments.desert;
 
 import interfaces.Challenger;
 import interfaces.Environment;
-import models.Enemy;
 import models.Player;
 import models.desert.Door;
 import models.desert.Rock;
+import utilities.AnsiColor;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 //have cabin outside and inside?
 //describable interface can be subbed with toString
@@ -26,8 +26,8 @@ public class Cabin implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
-        Display.print("What will you do?");
+        IOConsole.printlin(flavorText);
+        IOConsole.printlin("What will you do?");
     }
 
     @Override
@@ -44,21 +44,21 @@ public class Cabin implements Environment {
             String choice;
             if((choice = inputRepair(InputTaker.getPlayerInput())) != null){
                 if(choice.equals("hit door")){
-                    Display.print("You throw your body weight into the door but it won't budge. \n"
+                    IOConsole.printlin("You throw your body weight into the door but it won't budge. \n"
                     + "Looks like you're missing something...");
                 }
                 else if(choice.equals("use rock on door")){
                     //test whether program crashes when player doesn't have rock
                     if(Player.getYou().hasItem("rock") && Player.getYou().peekItem("rock") instanceof Rock ){
                         if(door.getAffected((Rock) Player.getYou().peekItem("rock"))){
-                            Display.print("With one well-placed blow, you shatter the locking mechanism! The door swings open.");
+                            IOConsole.printlin("With one well-placed blow, you shatter the locking mechanism! The door swings open.");
                         }
                         else{
-                            Display.print("The door is already open!");
+                            IOConsole.printlin("The door is already open!");
                         }
                     }
                     else{
-                        Display.print("You don't have a rock!");
+                        IOConsole.printlin("You don't have a rock!");
                     }
                 }
                 else if(choice.equals("go back")){
@@ -69,7 +69,7 @@ public class Cabin implements Environment {
                         inside.start();
                     }
                     else{
-                        Display.print("The door is locked!");
+                        IOConsole.printlin("The door is locked!");
                     }
                 }
                 else if(choice.equals("look")){
@@ -77,7 +77,7 @@ public class Cabin implements Environment {
                 }
             }
             else{
-                Display.print("Invalid input: try again.");
+                IOConsole.printlin("Invalid input: try again.");
             }
         }
         return true;

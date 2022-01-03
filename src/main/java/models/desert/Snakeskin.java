@@ -2,7 +2,7 @@ package models.desert;
 
 import interfaces.Item;
 import models.Player;
-import utilities.Display;
+import utilities.IOConsole;
 
 //improves hp
 public class Snakeskin implements Item {
@@ -17,7 +17,7 @@ public class Snakeskin implements Item {
     }
 
     public static void statIncrease(){
-        Display.print("Max hp increased by 200!");
+        IOConsole.printlin("Max hp increased by 200!");
         Player.getYou().addMaxHp(200);
     }
 }

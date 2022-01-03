@@ -20,22 +20,22 @@ public final class InputTaker {
             case "n": case "no":
                 return false;
             default:
-                Display.print("what?");
+                IOConsole.printlin("what?");
                 return null;
         }
     }
     private static Boolean isPlayerCommand(String input){
         input = input.toLowerCase(Locale.ROOT);
-        if (input.equals("status") || input.equals("stats"){
+        if (input.equals("status") || input.equals("stats")){
             Player.getYou().statusUpdate();
             return true;
         }
         String[] wordar = input.split(" ");
-        if(wordar.length == 2 && (wordar[0].equals("check") || wordar[0].equals("look")){
+        if(wordar.length == 2 && (wordar[0].equals("check") || wordar[0].equals("look"))){
             Player.getYou().describeItem(wordar[1]);
             return true;
         }
-
+        return false;
     }
     public static boolean getYesOrNo(){
         return Boolean.TRUE.equals(yesOrNo(getPlayerInput()));

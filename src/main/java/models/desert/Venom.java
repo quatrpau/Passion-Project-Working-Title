@@ -2,7 +2,7 @@ package models.desert;
 
 import interfaces.Item;
 import models.Player;
-import utilities.Display;
+import utilities.IOConsole;
 
 //improves damage
 public class Venom implements Item {
@@ -17,7 +17,7 @@ public class Venom implements Item {
     }
 
     public static void statIncrease(){
-        Display.print("Increased Damage by 75");
+        IOConsole.printlin("Increased Damage by 75");
         Player.getYou().addDamage(75);
 
     }

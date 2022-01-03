@@ -7,7 +7,7 @@ import models.desert.GiantScorpion;
 import models.desert.Snake;
 import models.desert.Vulture;
 import utilities.Battle;
-import utilities.Display;
+import utilities.IOConsole;
 import utilities.InputTaker;
 
 import java.util.Random;
@@ -27,8 +27,8 @@ public class Desert implements Environment {
 
     @Override
     public void giveFlavorText() {
-        Display.print(flavorText);
-        Display.print("What will you do?");
+        IOConsole.printlin(flavorText);
+        IOConsole.printlin("What will you do?");
     }
 
     @Override
@@ -48,11 +48,11 @@ public class Desert implements Environment {
                         Challenger opponent = opponentSelector();
                         Boolean outcome = triggerBattle(opponent).getResult();//vary opponent (have 3 different kinds)
                         if(outcome == null){
-                            Display.print("You reached an agreement"); //reward?
+                            IOConsole.printlin("You reached an agreement"); //reward?
                             day++;
                         }
                         else if(outcome){
-                            Display.print("You won!");
+                            IOConsole.printlin("You won!");
                             Player.getYou().addToInventory(opponent.giveReward());
                             day++;
                         }
@@ -62,14 +62,14 @@ public class Desert implements Environment {
                     }
                 }
                 else if(decision.equals("go south")){
-                    Display.print("You have come so far, it would be foolish to turn back now!");
+                    IOConsole.printlin("You have come so far, it would be foolish to turn back now!");
                 }
                 else if(decision.equals("look around")){
                     giveFlavorText();
                 }
             }
             else{
-                Display.print("Invalid input: try again");
+                IOConsole.printlin("Invalid input: try again");
             }
 
         }
