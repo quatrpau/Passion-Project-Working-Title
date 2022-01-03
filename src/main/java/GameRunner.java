@@ -26,5 +26,4 @@ public final class GameRunner {
 
 
 //Monday todo:
-//3 days in desert
-    //update each enemies' decide times to allow for less or no surrender and more a
+//have waterbottle and cactus flesh restore health and also disappear from inventory
