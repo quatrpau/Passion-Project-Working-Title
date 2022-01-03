@@ -28,3 +28,4 @@ public final class GameRunner {
 //have waterbottle and cactus flesh restore health and also disappear from inventory
 //have colored terminal
 //add help command
+//add appropriate gap commands
