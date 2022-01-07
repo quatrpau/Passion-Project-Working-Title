@@ -1,7 +1,9 @@
 package models.desert;
 
 import interfaces.Challenger;
-import interfaces.Item;
+import interfaces.EnvironmentAsset;
+import interfaces.Obtainable;
+import utilities.IOConsole;
 
 import java.util.Random;
 
@@ -10,7 +12,7 @@ public class Cactus implements Challenger {
     private int hp = 100;
     private int speed = 20;
     private int damage = 35;
-    private boolean inBattle = true;
+    private boolean inBattle = false;
     private final String normalText = "Just a normal cactus.";
     private final String battleText = "A cactus with nothing to lose.";
     private final String name = "Cactus";
@@ -54,7 +56,7 @@ public class Cactus implements Challenger {
     }
 
     @Override
-    public Item giveReward() {
+    public Obtainable giveReward() {
         return new CactusFlesh();
     }
     @Override
@@ -69,7 +71,18 @@ public class Cactus implements Challenger {
         Random random = new Random();
         return random.nextBoolean();
     }
-    public void setBattleStatus(){
-        inBattle = true;
+    public void setBattleStatus(Boolean status){
+        inBattle = status;
+    }
+
+    @Override
+    public void giveFlavorText() {
+        if(inBattle){
+            IOConsole.printlin(name + ":");
+            IOConsole.printlin(this.battleText);
+        }
+        else{
+            IOConsole.printlin(this.normalText);
+        }
     }
 }

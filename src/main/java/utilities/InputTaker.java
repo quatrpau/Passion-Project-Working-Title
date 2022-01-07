@@ -5,9 +5,22 @@ import models.Player;
 import java.util.Locale;
 import java.util.Scanner;
 public final class InputTaker {
+    private static final String HELP = "Available Commands: \n" +
+    "check: check an item in your inventory \n" +
+    "stats: get your status \n" +
+    "look: check environment or an item in the environment \n" +
+    "use: use an item in your inventory \n" +
+    "\t use ___ on ___: for item interactions \n" +
+    "go: move between environments \n" +
+    "help: triggers this command \n" +
+    "Feel free to experiment with these commands and discover alternative versions!";
     private static final Scanner inputTaker = new Scanner(System.in);
     public static String getPlayerInput(){
-        return inputTaker.nextLine().toLowerCase(Locale.ROOT);
+        String choice = inputTaker.nextLine().toLowerCase(Locale.ROOT);
+        if(isPlayerCommand(choice)){
+            return null;
+        }
+        return lookCheck(choice);
     }
     public static String getPlayerName(){
         return inputTaker.nextLine();
@@ -31,9 +44,12 @@ public final class InputTaker {
             return true;
         }
         String[] wordar = input.split(" ");
-        if(wordar.length == 2 && (wordar[0].equals("check") || wordar[0].equals("look"))){
+        if(wordar.length == 2 && (wordar[0].equals("check"))){
             Player.getYou().describeItem(wordar[1]);
             return true;
+        }
+        if(input.equals("help")){
+            IOConsole.printlin(HELP);
         }
         return false;
     }
@@ -41,4 +57,12 @@ public final class InputTaker {
         return Boolean.TRUE.equals(yesOrNo(getPlayerInput()));
     }
     //global verb check (status, stat, inventory, //look around, //exit)
+    private static String lookCheck(String raw){
+        String looker = raw.split(" ")[0];
+        if(looker.equals("observe") || looker.equals("describe") || looker.equals("inspect")){
+            return raw.replace(looker,"look");
+        }
+        return raw;
+    }
 }
+//implement exit;

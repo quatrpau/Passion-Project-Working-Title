@@ -40,9 +40,10 @@ public class Desert implements Environment {
     public Boolean start() {
         giveFlavorText();
         String decision;
+        String input;
         boolean keepGoing = true;
         while(keepGoing && day <= 3){
-            if((decision = inputRepair(InputTaker.getPlayerInput())) != null) {
+            if(((input = InputTaker.getPlayerInput()) != null) && (decision = inputRepair(input)) != null) {
                 if(decision.equals("go north")){
                     if(Boolean.TRUE.equals(battleChanceCalculator())){
                         Challenger opponent = opponentSelector();
@@ -67,6 +68,9 @@ public class Desert implements Environment {
                 else if(decision.equals("look around")){
                     giveFlavorText();
                 }
+            }
+            else if(input == null){
+                giveFlavorText();
             }
             else{
                 IOConsole.printlin("Invalid input: try again");

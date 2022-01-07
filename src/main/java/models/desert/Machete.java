@@ -1,10 +1,10 @@
 package models.desert;
 
-import interfaces.Item;
+import interfaces.Obtainable;
 import models.Player;
 import utilities.IOConsole;
 
-public class Machete implements Item {
+public class Machete implements Obtainable {
 
     @Override
     public String getName() {

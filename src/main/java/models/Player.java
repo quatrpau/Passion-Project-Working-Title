@@ -1,7 +1,7 @@
 package models;
 
 import interfaces.Being;
-import interfaces.Item;
+import interfaces.Obtainable;
 import utilities.IOConsole;
 import utilities.Inventory;
 
@@ -60,13 +60,13 @@ public final class Player implements Being {
     public Boolean hasItem(String item){
         return this.inventory.peek(item) != null;
     }
-    public Item peekItem(String item){
+    public Obtainable peekItem(String item){
         return this.inventory.peek(item);
     }
     //inventory
     //returns whether it was successful
-    public void addToInventory(Item item){
-        this.inventory.add(item);
+    public void addToInventory(Obtainable obtainable){
+        this.inventory.add(obtainable);
     }
     //statusUpdate will print of string output of players current inventory and stats and name
     public void statusUpdate(){
@@ -78,7 +78,7 @@ public final class Player implements Being {
     }
     //describe item
     public void describeItem(String item){
-        Item output = inventory.peek(item);
+        Obtainable output = inventory.peek(item);
         if(output == null){
             IOConsole.printlin("You do not have" + item + ".");
         }

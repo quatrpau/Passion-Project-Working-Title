@@ -1,7 +1,7 @@
 package models;
 
 import interfaces.Challenger;
-import interfaces.Item;
+import interfaces.Obtainable;
 
 import java.util.Random;
 
@@ -60,7 +60,7 @@ public class Enemy implements Challenger {
     }
 
     @Override
-    public Item giveReward() {
+    public Obtainable giveReward() {
         return null;
     }
 }

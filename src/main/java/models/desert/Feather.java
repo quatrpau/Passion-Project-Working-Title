@@ -1,11 +1,11 @@
 package models.desert;
 
-import interfaces.Item;
+import interfaces.Obtainable;
 import models.Player;
 import utilities.IOConsole;
 
 //improves speed;
-public class Feather implements Item {
+public class Feather implements Obtainable {
     @Override
     public String getName() {
         return "Feather";

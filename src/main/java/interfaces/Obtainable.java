@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Item {
+public interface Obtainable {
     String getName();
     String getDescription();
 }

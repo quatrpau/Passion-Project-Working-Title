@@ -1,10 +1,9 @@
 package models.desert;
 
-import interfaces.Affectable;
-import interfaces.Item;
+import interfaces.Obtainable;
 
 //interface for flavor text? //ie describable
-public class CactusFlesh implements Item {
+public class CactusFlesh implements Obtainable {
     @Override
     public String getName() {
         return "Cactus Flesh";

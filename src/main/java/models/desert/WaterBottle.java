@@ -1,8 +1,8 @@
 package models.desert;
 
-import interfaces.Item;
+import interfaces.Obtainable;
 
-public class WaterBottle implements Item {
+public class WaterBottle implements Obtainable {
     @Override
     public String getName() {
         return "Water Bottle";

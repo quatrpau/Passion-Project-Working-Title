@@ -1,7 +1,8 @@
 package models.desert;
 
 import interfaces.Challenger;
-import interfaces.Item;
+import interfaces.Obtainable;
+import utilities.IOConsole;
 
 import java.util.Random;
 
@@ -42,7 +43,7 @@ public class GiantScorpion implements Challenger {
     }
 
     @Override
-    public Item giveReward() {
+    public Obtainable giveReward() {
         Venom.statIncrease();
         return new Venom();
     }
@@ -83,5 +84,11 @@ public class GiantScorpion implements Challenger {
             return true;
         }
         return random.nextBoolean();
+    }
+
+    @Override
+    public void giveFlavorText() {
+        IOConsole.printlin(name + ":");
+        IOConsole.printlin(flavorText);
     }
 }

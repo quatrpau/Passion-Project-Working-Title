@@ -1,7 +1,8 @@
 package models.desert;
 
 import interfaces.Challenger;
-import interfaces.Item;
+import interfaces.Obtainable;
+import utilities.IOConsole;
 
 import java.util.Random;
 
@@ -42,7 +43,7 @@ public class Snake implements Challenger {
     }
 
     @Override
-    public Item giveReward() {
+    public Obtainable giveReward() {
         Snakeskin.statIncrease();
         return new Snakeskin();
     }
@@ -83,5 +84,11 @@ public class Snake implements Challenger {
             return true;
         }
         return random.nextBoolean();
+    }
+
+    @Override
+    public void giveFlavorText() {
+        IOConsole.printlin(name + ":");
+        IOConsole.printlin(flavorText);
     }
 }

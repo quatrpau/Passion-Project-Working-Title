@@ -42,9 +42,10 @@ public class CactusArea implements Environment {
         boolean keepGoing = true;
         while(keepGoing) {
             String choice;
+            String input;
             //take rock//get rock//pick up rock
             //if rock
-            if ((choice = inputRepair(InputTaker.getPlayerInput())) != null) {
+            if ((input = InputTaker.getPlayerInput()) != null && (choice = inputRepair(input)) != null) {
                 if (choice.equals("take rock") && !rockIsGone) {
                     Player.getYou().addToInventory(new Rock());
                     setFlavorText("You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that.");
@@ -57,6 +58,7 @@ public class CactusArea implements Environment {
                 //use machete on cactus
                 else if(choice.equals("use machete on cactus")){
                     if(Player.getYou().hasItem("machete")){
+                        cactus.setBattleStatus(true);
                         Boolean outcome = triggerBattle(this.cactus).getResult();
                         if (outcome == null) {
                             //something better here//cactus gives you water or something
@@ -93,7 +95,24 @@ public class CactusArea implements Environment {
                 else if(choice.equals("look")){
                     giveFlavorText();
                 }
-
+                else if(choice.equals("look cactus")){
+                    if(!cactusCutDown){
+                        cactus.giveFlavorText();
+                    }
+                    else{
+                        IOConsole.printlin("The stump of a once-prominent cactus.");
+                    }
+                }
+                else if(choice.equals("look rock"));
+                    if(!rockIsGone){
+                        IOConsole.printlin("A big rock");
+                    }
+                    else{
+                        IOConsole.printCheckError();
+                    }
+            }
+            else if(input == null){
+                giveFlavorText();
             }
             else{
                 IOConsole.printlin("Invalid input: try again.");
@@ -116,6 +135,12 @@ public class CactusArea implements Environment {
         }
         else if(raw.equals("look around") || raw.equals("look")){
             return "look";
+        }
+        else if(raw.equals("look at cactus") || raw.equals("look cactus")){
+            return "look cactus";
+        }
+        else if(raw.equals("look at rock") || raw.equals("look rock")){
+            return "look rock";
         }
         else{
             return null;

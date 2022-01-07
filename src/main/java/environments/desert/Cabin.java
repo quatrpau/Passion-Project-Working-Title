@@ -13,8 +13,8 @@ import utilities.InputTaker;
 //describable interface can be subbed with toString
 public class Cabin implements Environment {
     //private boolean inside = false;
-    private Door door = new Door();
-    private CabinInside inside = new CabinInside();
+    private final Door door = new Door(); //inspect door
+    private final CabinInside inside = new CabinInside();
     private String flavorText = "You approach the cabin. It seems to have been abandoned for quite some time. \n" +
             "The only point of entry is a metal door.";
 
@@ -42,7 +42,8 @@ public class Cabin implements Environment {
 
         while(keepGoing){
             String choice;
-            if((choice = inputRepair(InputTaker.getPlayerInput())) != null){
+            String input;
+            if((input =  InputTaker.getPlayerInput()) != null && (choice = inputRepair(input)) != null){
                 if(choice.equals("hit door")){
                     IOConsole.printlin("You throw your body weight into the door but it won't budge. \n"
                     + "Looks like you're missing something...");
@@ -75,6 +76,12 @@ public class Cabin implements Environment {
                 else if(choice.equals("look")){
                     giveFlavorText();
                 }
+                else if(choice.equals("look door")){
+                    door.giveFlavorText();
+                }
+            }
+            else if(input == null) {
+                giveFlavorText();
             }
             else{
                 IOConsole.printlin("Invalid input: try again.");
@@ -83,6 +90,7 @@ public class Cabin implements Environment {
         return true;
     }
     private String inputRepair(String raw){
+        //knock on door
         if(raw.equals("hit door")){
             return "hit door";
         }
@@ -98,6 +106,9 @@ public class Cabin implements Environment {
         }
         else if(raw.equals("look") || raw.equals("look around")){
             return "look";
+        }
+        else if(raw.equals("look door") || raw.equals("look at door")){
+            return "look door";
         }
         else{
             return null;

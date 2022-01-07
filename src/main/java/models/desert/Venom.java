@@ -1,11 +1,11 @@
 package models.desert;
 
-import interfaces.Item;
+import interfaces.Obtainable;
 import models.Player;
 import utilities.IOConsole;
 
 //improves damage
-public class Venom implements Item {
+public class Venom implements Obtainable {
     @Override
     public String getName() {
         return "Venom";

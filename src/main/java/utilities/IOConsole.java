@@ -11,6 +11,7 @@ public final class IOConsole {
     public static void printlin(String text){
         System.out.println(text);
     }
+    public static void printCheckError() {System.out.println("Try using 'check' for items in your inventory");}
     private final Scanner input;
     private final  PrintStream output;
     private final AnsiColor ansiColor;

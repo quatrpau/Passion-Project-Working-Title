@@ -1,11 +1,11 @@
 package models.desert;
 
-import interfaces.Item;
+import interfaces.Obtainable;
 import models.Player;
 import utilities.IOConsole;
 
 //improves hp
-public class Snakeskin implements Item {
+public class Snakeskin implements Obtainable {
     @Override
     public String getName() {
         return "Snakeskin";

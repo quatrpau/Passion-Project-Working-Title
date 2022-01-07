@@ -35,7 +35,8 @@ public class CabinInside implements Environment {
         boolean keepGoing = true;
         while(keepGoing){
             String choice;
-            if ((choice = inputRepair(InputTaker.getPlayerInput())) != null) {
+            String input;
+            if ((input = InputTaker.getPlayerInput()) != null && ((choice = inputRepair(input)) != null)){
                 if(choice.equals("get machete")){
                     if(!macheteGot){
                         IOConsole.printlin("Got the machete!");
@@ -53,6 +54,17 @@ public class CabinInside implements Environment {
                 else if(choice.equals("look")){
                     giveFlavorText();
                 }
+                else if(choice.equals("look machete")){
+                    if(macheteGot){
+                        IOConsole.printlin("An old, forgotten machete.");
+                    }
+                    else{
+                        IOConsole.printlin("Try using 'check' for items in your inventory.");
+                    }
+                }
+            }
+            else if(input == null){
+                giveFlavorText();
             }
             else{
                 IOConsole.printlin("Invalid input: try again.");
@@ -69,6 +81,9 @@ public class CabinInside implements Environment {
         }
         if(raw.equals("look around") || raw.equals("look")){
             return "look";
+        }
+        if(raw.equals("look machete") || raw.equals("look at machete")){
+            return "look machete";
         }
         else{
             return null;

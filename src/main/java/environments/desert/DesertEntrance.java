@@ -54,7 +54,8 @@ public class DesertEntrance implements Environment {
         boolean crossedDesert = false;
         while(keepGoing) {
             String decision;
-            if((decision = inputRepair(InputTaker.getPlayerInput())) != null) {
+            String input;
+            if(((input = InputTaker.getPlayerInput()) != null) && (decision = inputRepair(input)) != null) {
                 if(decision.equals("go cabin")){
                     //go cabin// go right // right // move right // cabin //
                     keepGoing = cabin.start();
@@ -78,6 +79,15 @@ public class DesertEntrance implements Environment {
                 else if(decision.equals("look")){
                     giveFlavorText();
                 }
+                else if(decision.equals("look signpost")){
+                    IOConsole.printlin("YELLOW DESERT");
+                }
+                else if(decision.equals("look woman")){
+                    IOConsole.printlin("She seems to be very engrossed in her newspaper.");
+                }
+            }
+            else if(input == null){
+                giveFlavorText();
             }
             else{
                 IOConsole.printlin("Invalid input: try again");
@@ -89,13 +99,14 @@ public class DesertEntrance implements Environment {
         return false;
     }
     private String inputRepair(String raw){
-        if(raw.equals("go cabin")){
+        if(raw.equals("go cabin") || raw.equals("go left")){
             return "go cabin";
         }
-        else if(raw.equals("go guide")){
-            return "go guide";
+        else if(raw.equals("go woman") || raw.equals("talk to woman")
+                || raw.equals("go guide") || raw.equals("talk to guide") ){
+            return "go woman";
         }
-        else if(raw.equals("go cactus")){
+        else if(raw.equals("go cactus") || raw.equals("go right")){
             return "go cactus";
         }
         else if(raw.equals("go desert") || raw.equals("enter desert")){
@@ -103,6 +114,13 @@ public class DesertEntrance implements Environment {
         }
         else if(raw.equals("look around") || raw.equals("look")){
             return "look";
+        }
+        else if(raw.equals("look signpost") || raw.equals("look at signpost")){
+            return "look signpost";
+        }
+        else if(raw.equals("look woman") || raw.equals("look at woman")
+                || raw.equals("look at guide") || raw.equals("look guide")){
+            return "look woman";
         }
         else{
             return null;
