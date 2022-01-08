@@ -60,6 +60,10 @@ public class Enemy implements Challenger {
     }
 
     @Override
+    public void giveFlavorText() {
+    }
+
+    @Override
     public Obtainable giveReward() {
         return null;
     }
