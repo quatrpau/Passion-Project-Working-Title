@@ -19,7 +19,6 @@ public final class GameRunner {
 
 
 //FRIDAY TODO:
-//Implement this on angular
 //have jpa backend
 
 //what should be stored in the database besides enemy statistics
