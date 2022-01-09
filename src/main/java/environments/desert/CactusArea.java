@@ -41,7 +41,6 @@ public class CactusArea implements Environment {
     @Override
     public Boolean start() {
         giveFlavorText();
-        console.println("What will you do?");
         boolean keepGoing = true;
         while(keepGoing) {
             String choice;
@@ -88,10 +87,10 @@ public class CactusArea implements Environment {
                 else if(choice.equals("use rock on cactus")){
                     if(Player.getYou().hasItem("rock")){
                         console.println("You try and hit the cactus with the rock but it just bounces off.\n" +
-                                "Looks like you'll need something else.");
+                                "Looks like you'll need something else...");
                     }
                     else{
-                        console.println("You don't have the rock");
+                        console.println("You don't have a rock...");
                     }
                 }
                 //repeat
@@ -106,13 +105,13 @@ public class CactusArea implements Environment {
                         console.println("The stump of a once-prominent cactus.");
                     }
                 }
-                else if(choice.equals("look rock"));
-                    if(!rockIsGone){
+                else if(choice.equals("look rock")) {
+                    if (!rockIsGone) {
                         console.println("A big rock");
-                    }
-                    else{
+                    } else {
                         console.printCheckError();
                     }
+                }
             }
             else if(input == null){
                 giveFlavorText();

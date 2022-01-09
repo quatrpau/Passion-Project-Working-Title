@@ -1,5 +1,4 @@
 //TODO
-//puzzles
 //king's quest style game-over puns?
 //use jpa
 //make playable
@@ -14,11 +13,6 @@ public final class GameRunner {
     }
 }
 //have waterbottle and cactus flesh restore health and also disappear from inventory
-//have colored terminal
 
 
 
-//FRIDAY TODO:
-//have jpa backend
-
-//what should be stored in the database besides enemy statistics

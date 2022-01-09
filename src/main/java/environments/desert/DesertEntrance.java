@@ -1,4 +1,3 @@
-//make this text yellow
 package environments.desert;
 import interfaces.Challenger;
 import interfaces.Environment;
@@ -9,7 +8,6 @@ import utilities.IOConsole;
 import utilities.InputTaker;
 //GO BACK (but not when deep in desert) (or at home text)
 public class DesertEntrance implements Environment {
-    //should i have a map or a list of surroundingsStrings
     private IOConsole console = AnsiColor.ORANGE.ioConsole;
     private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow Desert\". A desolate place stretching as far as the eye can see.\n"
             + "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\".\n" +
@@ -63,7 +61,7 @@ public class DesertEntrance implements Environment {
                     keepGoing = cabin.start();
                     if(keepGoing) giveFlavorText();
                 }
-                else if(decision.equals("go guide")){
+                else if(decision.equals("go woman")){
                     //go woman// talk to woman// talk woman // woman
                     //go guide// talk to guide// talk guide // guide (this may be bound to help)
                     guide.speak();
@@ -117,7 +115,8 @@ public class DesertEntrance implements Environment {
         else if(raw.equals("look around") || raw.equals("look")){
             return "look";
         }
-        else if(raw.equals("look signpost") || raw.equals("look at signpost")){
+        else if(raw.equals("look signpost") || raw.equals("look at signpost")
+        || raw.equals("look at sign") || raw.equals("look sign")){
             return "look signpost";
         }
         else if(raw.equals("look woman") || raw.equals("look at woman")

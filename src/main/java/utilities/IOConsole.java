@@ -29,42 +29,13 @@ public final class IOConsole {
         output.format(val, args);
     }
     public void print(String val, Object... args) {
+        //try to make it so that new lines are printed regularly
         output.format(ansiColor.getColor() + val + "\u001b[0m", args);
     }
-
     public void println(String val, Object... vals) {
         print(val, vals);
         printReg("\n",vals);
     }
+    public void printCheckError() { println("Try using 'check' for items in your inventory");}
 
-    public String getStringInput(String prompt, Object... args) {
-        println(prompt, args);
-        return input.nextLine();
-    }
-    public void printCheckError() {println("Try using 'check' for items in your inventory");}
-    public Double getDoubleInput(String prompt, Object... args) {
-        String stringInput = getStringInput(prompt, args);
-        try {
-            return Double.parseDouble(stringInput);
-        } catch (NumberFormatException nfe) {
-            println("[ %s ] is an invalid user input!", stringInput);
-            println("Try inputting a numeric value!");
-            return getDoubleInput(prompt, args);
-        }
-    }
-
-    public Long getLongInput(String prompt, Object... args) {
-        String stringInput = getStringInput(prompt, args);
-        try {
-            return Long.parseLong(stringInput);
-        } catch (NumberFormatException nfe) {
-            println("[ %s ] is an invalid user input!", stringInput);
-            println("Try inputting an integer value!");
-            return getLongInput(prompt, args);
-        }
-    }
-
-    public Integer getIntegerInput(String prompt, Object... args) {
-        return getLongInput(prompt, args).intValue();
-    }
 }

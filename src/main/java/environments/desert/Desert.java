@@ -12,16 +12,17 @@ import utilities.IOConsole;
 import utilities.InputTaker;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 //maybe make desert display only orange and/or yellow depending
 //on whether or not you are at the entrance
 public class Desert implements Environment {
     //have you die of thirst if you go without the cactus
-    private int day = 1;
+    private int day = 0;
     private final Random random = new Random();
     private final IOConsole console = AnsiColor.YELLOW.ioConsole;
     private String flavorText = "You see nothing but sand, and you hope it stays that way. You must keep heading north. \n" +
-            "Days to Dragon:" + (3 - day) + "NOTE: Each turn counts as a day passed.";
+            "(NOTE: Each turn counts as a day passed.)\nDays to Dragon: ";
     @Override
     public Battle triggerBattle(Challenger opponent) {
         return new Battle(opponent);
@@ -29,7 +30,8 @@ public class Desert implements Environment {
 
     @Override
     public void giveFlavorText() {
-        console.println(flavorText);
+        console.print(flavorText);
+        console.println(Integer.valueOf(3 - day).toString());
         console.println("What will you do?");
     }
 
@@ -50,6 +52,7 @@ public class Desert implements Environment {
                 if(decision.equals("go north")){
                     if(Boolean.TRUE.equals(battleChanceCalculator())){
                         Challenger opponent = opponentSelector();
+                        console.println("You encounter a " + opponent.getName() + "!");
                         Boolean outcome = triggerBattle(opponent).getResult();//vary opponent (have 3 different kinds)
                         if(outcome == null){
                             console.println("You reached an agreement"); //reward?
@@ -61,7 +64,14 @@ public class Desert implements Environment {
                             day++;
                         }
                         else{
+                            day = 0;
                             return false;
+                        }
+                    }
+                    else{
+                        day++;
+                        if(day <= 3){
+                            giveFlavorText();
                         }
                     }
                 }
@@ -78,15 +88,19 @@ public class Desert implements Environment {
             else{
                 console.println("Invalid input: try again");
             }
-
         }
         if(day > 3){
+            day = 0;
             return true;
         }
         return false;
     }
 
     private Boolean battleChanceCalculator() {
+        if(day == 0){
+            int twenty = random.nextInt(20);
+            return twenty == 1;
+        }
         if(day == 1){
             int ten = random.nextInt(10);
             return ten == 1;
