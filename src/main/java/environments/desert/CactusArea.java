@@ -6,6 +6,7 @@ import models.Player;
 import models.desert.Cactus;
 import models.desert.Rock;
 import models.desert.WaterBottle;
+import utilities.AnsiColor;
 import utilities.Battle;
 import utilities.IOConsole;
 import utilities.InputTaker;
@@ -14,6 +15,7 @@ public class CactusArea implements Environment {
     private Cactus cactus;
     private Boolean cactusCutDown = false;
     private Boolean rockIsGone = false;
+    private IOConsole console = AnsiColor.ORANGE.ioConsole;
     private String flavorText =  "You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that. \n" +
             "A large rock is propped up at the base of the cactus.";
     //battle cactus maybe?
@@ -24,7 +26,8 @@ public class CactusArea implements Environment {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(flavorText);
+        console.println(flavorText);
+        console.println("What will you do?");
     }
 
     @Override
@@ -38,7 +41,7 @@ public class CactusArea implements Environment {
     @Override
     public Boolean start() {
         giveFlavorText();
-        IOConsole.printlin("What will you do?");
+        console.println("What will you do?");
         boolean keepGoing = true;
         while(keepGoing) {
             String choice;
@@ -49,7 +52,7 @@ public class CactusArea implements Environment {
                 if (choice.equals("take rock") && !rockIsGone) {
                     Player.getYou().addToInventory(new Rock());
                     setFlavorText("You approach the cactus. You've heard that you can extract water from the cactus by cutting it open. If only you had a way to do that.");
-                    IOConsole.printlin("Got the rock!");
+                    console.println("Got the rock!");
                     rockIsGone = true;
                 }
                 else if(choice.equals("go back")){
@@ -62,14 +65,14 @@ public class CactusArea implements Environment {
                         Boolean outcome = triggerBattle(this.cactus).getResult();
                         if (outcome == null) {
                             //something better here//cactus gives you water or something
-                            IOConsole.printlin("You came to an agreement.");
+                            console.println("You came to an agreement.");
                             //may return null here
-                            IOConsole.printlin("You got a water bottle!");
+                            console.println("You got a water bottle!");
                             Player.getYou().addToInventory(new WaterBottle());
                         } else if (outcome) {
-                            IOConsole.printlin("You defeated the cactus.");
+                            console.println("You defeated the cactus.");
                             cactusCutDown = true;
-                            IOConsole.printlin("You got the cactus flesh!");
+                            console.println("You got the cactus flesh!");
                             this.setFlavorText("The stump of a once-prominent cactus.");
                             Player.getYou().addToInventory(cactus.giveReward());
                         } else {
@@ -78,17 +81,17 @@ public class CactusArea implements Environment {
                         }
                     }
                     else{
-                        IOConsole.printlin("You don't have the machete.");
+                        console.println("You don't have the machete.");
                     }
                 }
                 //use rock on cactus
                 else if(choice.equals("use rock on cactus")){
                     if(Player.getYou().hasItem("rock")){
-                        IOConsole.printlin("You try and hit the cactus with the rock but it just bounces off.\n" +
+                        console.println("You try and hit the cactus with the rock but it just bounces off.\n" +
                                 "Looks like you'll need something else.");
                     }
                     else{
-                        IOConsole.printlin("You don't have the rock");
+                        console.println("You don't have the rock");
                     }
                 }
                 //repeat
@@ -100,22 +103,22 @@ public class CactusArea implements Environment {
                         cactus.giveFlavorText();
                     }
                     else{
-                        IOConsole.printlin("The stump of a once-prominent cactus.");
+                        console.println("The stump of a once-prominent cactus.");
                     }
                 }
                 else if(choice.equals("look rock"));
                     if(!rockIsGone){
-                        IOConsole.printlin("A big rock");
+                        console.println("A big rock");
                     }
                     else{
-                        IOConsole.printCheckError();
+                        console.printCheckError();
                     }
             }
             else if(input == null){
                 giveFlavorText();
             }
             else{
-                IOConsole.printlin("Invalid input: try again.");
+                console.println("Invalid input: try again.");
             }
         }
         return true;

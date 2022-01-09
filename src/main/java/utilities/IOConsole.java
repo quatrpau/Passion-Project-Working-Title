@@ -8,10 +8,6 @@ import java.util.Scanner;
 //make static
 //make enum?
 public final class IOConsole {
-    public static void printlin(String text){
-        System.out.println(text);
-    }
-    public static void printCheckError() {System.out.println("Try using 'check' for items in your inventory");}
     private final Scanner input;
     private final  PrintStream output;
     private final AnsiColor ansiColor;
@@ -29,20 +25,23 @@ public final class IOConsole {
         this.input = new Scanner(in);
         this.output = out;
     }
-
+    public void printReg(String val, Object... args){
+        output.format(val, args);
+    }
     public void print(String val, Object... args) {
-        output.format(ansiColor.getColor() + val, args);
+        output.format(ansiColor.getColor() + val + "\u001b[0m", args);
     }
 
     public void println(String val, Object... vals) {
-        print(val + "\n", vals);
+        print(val, vals);
+        printReg("\n",vals);
     }
 
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
         return input.nextLine();
     }
-
+    public void printCheckError() {println("Try using 'check' for items in your inventory");}
     public Double getDoubleInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);
         try {

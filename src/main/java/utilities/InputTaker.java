@@ -14,6 +14,7 @@ public final class InputTaker {
     "go: move between environments \n" +
     "help: triggers this command \n" +
     "Feel free to experiment with these commands and discover alternative versions!";
+    private static final IOConsole console = AnsiColor.BLACK_AND_WHITE.ioConsole;
     private static final Scanner inputTaker = new Scanner(System.in);
     public static String getPlayerInput(){
         String choice = inputTaker.nextLine().toLowerCase(Locale.ROOT);
@@ -33,7 +34,7 @@ public final class InputTaker {
             case "n": case "no":
                 return false;
             default:
-                IOConsole.printlin("what?");
+                console.println("what?");
                 return null;
         }
     }
@@ -49,7 +50,8 @@ public final class InputTaker {
             return true;
         }
         if(input.equals("help")){
-            IOConsole.printlin(HELP);
+            console.println(HELP);
+            return true;
         }
         return false;
     }

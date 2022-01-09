@@ -13,6 +13,7 @@ import utilities.InputTaker;
 public class CabinInside implements Environment {
     private String flavorText = "You enter the cabin, inside you see it is empty except for a machete sitting in the middle of the floor.";
     private Boolean macheteGot = false;
+    private IOConsole console = AnsiColor.ORANGE.ioConsole;
     @Override
     public Battle triggerBattle(Challenger opponent) {
         return null;
@@ -20,8 +21,8 @@ public class CabinInside implements Environment {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(flavorText);
-        IOConsole.printlin("What will you do?");
+        console.println(flavorText);
+        console.println("What will you do?");
     }
 
     @Override
@@ -39,13 +40,13 @@ public class CabinInside implements Environment {
             if ((input = InputTaker.getPlayerInput()) != null && ((choice = inputRepair(input)) != null)){
                 if(choice.equals("get machete")){
                     if(!macheteGot){
-                        IOConsole.printlin("Got the machete!");
+                        console.println("Got the machete!");
                         Player.getYou().addToInventory(new Machete());
                         macheteGot = true;
                         setFlavorText("Nothing is left...");
                     }
                     else{
-                        IOConsole.printlin("There is no machete...");
+                        console.println("There is no machete...");
                     }
                 }
                 else if(choice.equals("go back")){
@@ -56,10 +57,10 @@ public class CabinInside implements Environment {
                 }
                 else if(choice.equals("look machete")){
                     if(macheteGot){
-                        IOConsole.printlin("An old, forgotten machete.");
+                        console.println("An old, forgotten machete.");
                     }
                     else{
-                        IOConsole.printlin("Try using 'check' for items in your inventory.");
+                        console.println("Try using 'check' for items in your inventory.");
                     }
                 }
             }
@@ -67,7 +68,7 @@ public class CabinInside implements Environment {
                 giveFlavorText();
             }
             else{
-                IOConsole.printlin("Invalid input: try again.");
+                console.println("Invalid input: try again.");
             }
         }
         return true;

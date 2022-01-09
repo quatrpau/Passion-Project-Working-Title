@@ -2,6 +2,7 @@ package models.desert;
 
 import interfaces.Obtainable;
 import models.Player;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 public class Machete implements Obtainable {
@@ -17,7 +18,7 @@ public class Machete implements Obtainable {
     }
 
     public void statIncrease(){
-        IOConsole.printlin("Increased damage by 100.");
+        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Increased damage by 100.");
         Player.getYou().addDamage(100);
     }
 }

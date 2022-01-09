@@ -6,6 +6,7 @@ import models.Player;
 import models.desert.GiantScorpion;
 import models.desert.Snake;
 import models.desert.Vulture;
+import utilities.AnsiColor;
 import utilities.Battle;
 import utilities.IOConsole;
 import utilities.InputTaker;
@@ -18,6 +19,7 @@ public class Desert implements Environment {
     //have you die of thirst if you go without the cactus
     private int day = 1;
     private final Random random = new Random();
+    private final IOConsole console = AnsiColor.YELLOW.ioConsole;
     private String flavorText = "You see nothing but sand, and you hope it stays that way. You must keep heading north. \n" +
             "Days to Dragon:" + (3 - day) + "NOTE: Each turn counts as a day passed.";
     @Override
@@ -27,8 +29,8 @@ public class Desert implements Environment {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(flavorText);
-        IOConsole.printlin("What will you do?");
+        console.println(flavorText);
+        console.println("What will you do?");
     }
 
     @Override
@@ -42,6 +44,7 @@ public class Desert implements Environment {
         String decision;
         String input;
         boolean keepGoing = true;
+        //have a way to exit the thing
         while(keepGoing && day <= 3){
             if(((input = InputTaker.getPlayerInput()) != null) && (decision = inputRepair(input)) != null) {
                 if(decision.equals("go north")){
@@ -49,11 +52,11 @@ public class Desert implements Environment {
                         Challenger opponent = opponentSelector();
                         Boolean outcome = triggerBattle(opponent).getResult();//vary opponent (have 3 different kinds)
                         if(outcome == null){
-                            IOConsole.printlin("You reached an agreement"); //reward?
+                            console.println("You reached an agreement"); //reward?
                             day++;
                         }
                         else if(outcome){
-                            IOConsole.printlin("You won!");
+                            console.println("You won!");
                             Player.getYou().addToInventory(opponent.giveReward());
                             day++;
                         }
@@ -63,7 +66,7 @@ public class Desert implements Environment {
                     }
                 }
                 else if(decision.equals("go south")){
-                    IOConsole.printlin("You have come so far, it would be foolish to turn back now!");
+                    console.println("You have come so far, it would be foolish to turn back now!");
                 }
                 else if(decision.equals("look around")){
                     giveFlavorText();
@@ -73,7 +76,7 @@ public class Desert implements Environment {
                 giveFlavorText();
             }
             else{
-                IOConsole.printlin("Invalid input: try again");
+                console.println("Invalid input: try again");
             }
 
         }

@@ -10,6 +10,8 @@ public final class Battle {
     private final Challenger opponent;
     private final Player you = Player.getYou();
     private final Boolean result;
+    //two different colors for opponent and you?
+    private final IOConsole console = AnsiColor.RED.ioConsole;
     private static final String YOUR_TURN = "What will you do? \n 1.) Surrender \n 2.) Attack \n 3.) Block";
     public Battle(Challenger opponent) {
         this.opponent = opponent;
@@ -59,7 +61,7 @@ public final class Battle {
     }
     //1st Turns
     private Turn playerTurn(){
-        IOConsole.printlin(YOUR_TURN);
+        console.println(YOUR_TURN);
         //exception handler?
         Action actionStorage;
         while(true){
@@ -67,7 +69,7 @@ public final class Battle {
                 return new Turn(actionStorage, this.you);
             }
             else{
-                IOConsole.printlin("Invalid input: try again");
+                console.println("Invalid input: try again");
             }
         }
     }
@@ -75,13 +77,13 @@ public final class Battle {
         Action actionStorage = getAction(String.valueOf(opponent.decideTime()));
         switch(Objects.requireNonNull(actionStorage)){
             case SURRENDER:
-                IOConsole.printlin("Your opponent attempts to surrender.");
+                console.println("Your opponent attempts to surrender.");
                 break;
             case ATTACK:
-                IOConsole.printlin("Your opponent attacks!");
+                console.println("Your opponent attacks!");
                 break;
             case BLOCK:
-                IOConsole.printlin("Your opponent prepares to block");
+                console.println("Your opponent prepares to block");
                 break;
         }
         return new Turn(actionStorage,this.opponent);
@@ -93,13 +95,13 @@ public final class Battle {
             return new Turn(Action.DEFER,this.you);
         }
         if(opponentTurn.getAction() == Action.SURRENDER){
-            IOConsole.printlin("Do you accept your opponent's surrender?(y/n)");
+            console.println("Do you accept your opponent's surrender?(y/n)");
             if(InputTaker.getYesOrNo()){
-                IOConsole.printlin("You accept and the battle ends.");
+                console.println("You accept and the battle ends.");
                 return new Turn(Action.SURRENDER, this.you);
             }
             else{
-                IOConsole.printlin("You deny the request with a vicious attack! (x2 Damage)");
+                console.println("You deny the request with a vicious attack! (x2 Damage)");
                 return new Turn(Action.CHEAP_SHOT, this.you);
             }
         }
@@ -113,7 +115,7 @@ public final class Battle {
         else{
             //print out toString of each being?
             you.takeDamage(opponentTurn.getMagnitude());
-            IOConsole.printlin("You take damage! Your health is now " + you.getHp() + ".");
+            console.println("You take damage! Your health is now " + you.getHp() + ".");
             if(you.isAlive()){
                 return playerTurn();
             }
@@ -126,11 +128,11 @@ public final class Battle {
         }
         if(playerTurn.getAction() == Action.SURRENDER){
             if(opponent.surrenderDecision()){
-                IOConsole.printlin("They accept and the battle ends.");
+                console.println("They accept and the battle ends.");
                 return new Turn(Action.SURRENDER, this.opponent);
             }
             else{
-                IOConsole.printlin("They deny your request with a vicious attack! (x2 Damage)");
+                console.println("They deny your request with a vicious attack! (x2 Damage)");
                 return new Turn(Action.CHEAP_SHOT, this.opponent);
             }
         }
@@ -144,7 +146,7 @@ public final class Battle {
         else {
             //print out toString of each being?
             opponent.takeDamage(playerTurn.getMagnitude());
-            IOConsole.printlin("It lands successfully. Their health is now " + opponent.getHp() + ".");
+            console.println("It lands successfully. Their health is now " + opponent.getHp() + ".");
             if (opponent.isAlive()) {
                 return opponentTurn();
             }
@@ -165,7 +167,7 @@ public final class Battle {
             case "3":
                 return Action.BLOCK;
             default:
-                IOConsole.printlin("Invalid choice: try again");
+                console.println("Invalid choice: try again");
                 return null;
         }
     }

@@ -3,6 +3,7 @@ package models.desert;
 import interfaces.Challenger;
 import interfaces.EnvironmentAsset;
 import interfaces.Obtainable;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 import java.util.Random;
@@ -16,6 +17,7 @@ public class Cactus implements Challenger {
     private final String normalText = "Just a normal cactus.";
     private final String battleText = "A cactus with nothing to lose.";
     private final String name = "Cactus";
+    private final IOConsole console = AnsiColor.YELLOW.ioConsole;
     @Override
     public int giveDamage() {
         return this.damage;
@@ -78,11 +80,11 @@ public class Cactus implements Challenger {
     @Override
     public void giveFlavorText() {
         if(inBattle){
-            IOConsole.printlin(name + ":");
-            IOConsole.printlin(this.battleText);
+            console.println(name + ":");
+            console.println(this.battleText);
         }
         else{
-            IOConsole.printlin(this.normalText);
+            console.println(this.normalText);
         }
     }
 }

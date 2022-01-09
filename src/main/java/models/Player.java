@@ -2,6 +2,7 @@ package models;
 
 import interfaces.Being;
 import interfaces.Obtainable;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 import utilities.Inventory;
 
@@ -11,6 +12,7 @@ public final class Player implements Being {
     //speed
     //hp
     private String name;
+    private IOConsole console = AnsiColor.BLACK_AND_WHITE.ioConsole;
     private int speed;
     private int damage;
     private int hp;
@@ -70,21 +72,22 @@ public final class Player implements Being {
     }
     //statusUpdate will print of string output of players current inventory and stats and name
     public void statusUpdate(){
-        IOConsole.printlin(this.name + ": ");
-        IOConsole.printlin("Speed: " + this.speed);
-        IOConsole.printlin("Damage: " + this.damage);
-        IOConsole.printlin("HP: " + this.hp);
-        IOConsole.printlin(this.inventory.toString());
+        console.println(this.name + ": ");
+        console.println("Speed: " + this.speed);
+        console.println("Damage: " + this.damage);
+        console.println("HP: " + this.hp);
+        console.println(this.inventory.toString());
     }
     //describe item
     public void describeItem(String item){
         Obtainable output = inventory.peek(item);
         if(output == null){
-            IOConsole.printlin("You do not have" + item + ".");
+            console.println("You do not have" + item + ".");
         }
-        IOConsole.printlin("Name: " + output.getName());
-        IOConsole.printlin("Description: " + output.getDescription());
-
+        else{
+            console.println("Name: " + output.getName());
+            console.println("Description: " + output.getDescription());
+        }
     }
 
 }

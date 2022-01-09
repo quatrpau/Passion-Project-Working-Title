@@ -3,12 +3,14 @@ package environments.desert;
 import interfaces.Challenger;
 import interfaces.Environment;
 import models.desert.DesertGuide;
+import utilities.AnsiColor;
 import utilities.Battle;
 import utilities.IOConsole;
 import utilities.InputTaker;
 //GO BACK (but not when deep in desert) (or at home text)
 public class DesertEntrance implements Environment {
     //should i have a map or a list of surroundingsStrings
+    private IOConsole console = AnsiColor.ORANGE.ioConsole;
     private String flavorText = "You spot the entrance for the desert demarcated by a sign that says \"Yellow Desert\". A desolate place stretching as far as the eye can see.\n"
             + "Next to the signpost, you see an older woman reading a newspaper in a wooden chair wearing a tattered straw hat. It is labeled \"GUIDE\".\n" +
             "To your right, you see an abandoned cabin. To your left, a lone cactus." ;
@@ -38,8 +40,8 @@ public class DesertEntrance implements Environment {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(flavorText);
-        IOConsole.printlin("What will you do?");
+        console.println(flavorText);
+        console.println("What will you do?");
     }
 
     @Override
@@ -80,17 +82,17 @@ public class DesertEntrance implements Environment {
                     giveFlavorText();
                 }
                 else if(decision.equals("look signpost")){
-                    IOConsole.printlin("YELLOW DESERT");
+                    console.println("YELLOW DESERT");
                 }
                 else if(decision.equals("look woman")){
-                    IOConsole.printlin("She seems to be very engrossed in her newspaper.");
+                    console.println("She seems to be very engrossed in her newspaper.");
                 }
             }
             else if(input == null){
                 giveFlavorText();
             }
             else{
-                IOConsole.printlin("Invalid input: try again");
+                console.println("Invalid input: try again");
             }
         }
         if(crossedDesert){

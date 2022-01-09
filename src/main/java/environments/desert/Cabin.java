@@ -15,6 +15,7 @@ public class Cabin implements Environment {
     //private boolean inside = false;
     private final Door door = new Door(); //inspect door
     private final CabinInside inside = new CabinInside();
+    private final IOConsole console = AnsiColor.ORANGE.ioConsole;
     private String flavorText = "You approach the cabin. It seems to have been abandoned for quite some time. \n" +
             "The only point of entry is a metal door.";
 
@@ -26,8 +27,9 @@ public class Cabin implements Environment {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(flavorText);
-        IOConsole.printlin("What will you do?");
+        console.println(flavorText);
+        //maybe make this a different color? or have it print from IOConsole?
+        console.println("What will you do?");
     }
 
     @Override
@@ -45,21 +47,21 @@ public class Cabin implements Environment {
             String input;
             if((input =  InputTaker.getPlayerInput()) != null && (choice = inputRepair(input)) != null){
                 if(choice.equals("hit door")){
-                    IOConsole.printlin("You throw your body weight into the door but it won't budge. \n"
+                    console.println("You throw your body weight into the door but it won't budge. \n"
                     + "Looks like you're missing something...");
                 }
                 else if(choice.equals("use rock on door")){
                     //test whether program crashes when player doesn't have rock
                     if(Player.getYou().hasItem("rock") && Player.getYou().peekItem("rock") instanceof Rock ){
                         if(door.getAffected((Rock) Player.getYou().peekItem("rock"))){
-                            IOConsole.printlin("With one well-placed blow, you shatter the locking mechanism! The door swings open.");
+                            console.println("With one well-placed blow, you shatter the locking mechanism! The door swings open.");
                         }
                         else{
-                            IOConsole.printlin("The door is already open!");
+                            console.println("The door is already open!");
                         }
                     }
                     else{
-                        IOConsole.printlin("You don't have a rock!");
+                        console.println("You don't have a rock!");
                     }
                 }
                 else if(choice.equals("go back")){
@@ -70,7 +72,7 @@ public class Cabin implements Environment {
                         inside.start();
                     }
                     else{
-                        IOConsole.printlin("The door is locked!");
+                        console.println("The door is locked!");
                     }
                 }
                 else if(choice.equals("look")){
@@ -84,7 +86,7 @@ public class Cabin implements Environment {
                 giveFlavorText();
             }
             else{
-                IOConsole.printlin("Invalid input: try again.");
+                console.println("Invalid input: try again.");
             }
         }
         return true;

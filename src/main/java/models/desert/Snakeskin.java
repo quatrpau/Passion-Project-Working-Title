@@ -2,6 +2,7 @@ package models.desert;
 
 import interfaces.Obtainable;
 import models.Player;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 //improves hp
@@ -17,7 +18,7 @@ public class Snakeskin implements Obtainable {
     }
 
     public static void statIncrease(){
-        IOConsole.printlin("Max hp increased by 200!");
+        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Max hp increased by 200!");
         Player.getYou().addMaxHp(200);
     }
 }

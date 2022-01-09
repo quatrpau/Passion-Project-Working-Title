@@ -2,6 +2,7 @@ package models.desert;
 
 import interfaces.Obtainable;
 import models.Player;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 //improves damage
@@ -17,7 +18,7 @@ public class Venom implements Obtainable {
     }
 
     public static void statIncrease(){
-        IOConsole.printlin("Increased Damage by 75");
+        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Increased Damage by 75");
         Player.getYou().addDamage(75);
 
     }

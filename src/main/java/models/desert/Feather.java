@@ -2,6 +2,7 @@ package models.desert;
 
 import interfaces.Obtainable;
 import models.Player;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 //improves speed;
@@ -16,7 +17,7 @@ public class Feather implements Obtainable {
         return "A feather from a vulture.";
     }
     public static void statIncrease(){
-        IOConsole.printlin("Speed increased by 100!");
+        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Speed increased by 100!");
         Player.getYou().addSpeed(100);
     }
 }

@@ -2,6 +2,7 @@ package models.desert;
 
 import interfaces.Challenger;
 import interfaces.Obtainable;
+import utilities.AnsiColor;
 import utilities.IOConsole;
 
 import java.util.Random;
@@ -89,7 +90,7 @@ public class Vulture implements Challenger {
 
     @Override
     public void giveFlavorText() {
-        IOConsole.printlin(name + ":");
-        IOConsole.printlin(flavorText);
+        AnsiColor.YELLOW.ioConsole.println(name + ":");
+        AnsiColor.YELLOW.ioConsole.println(flavorText);
     }
 }

@@ -13,12 +13,16 @@ public enum AnsiColor {
     BLUE("\u001B[34m"),
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
-    WHITE("\u001B[37m");
+    WHITE("\u001B[37m"),
+    ORANGE("\u001B[38;5;202m"),
+    BLACK_AND_WHITE("\u001B[30m\u001B[47m");
 
     private final String color;
+    public final IOConsole ioConsole;
 
     AnsiColor(String ansiColor) {
         this.color = ansiColor;
+        this.ioConsole = new IOConsole(this);
     }
 
     public String getColor() {

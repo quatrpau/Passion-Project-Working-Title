@@ -13,7 +13,7 @@ public final class Game implements Runnable {
     //private static final Game INSTANCE;
     //private Game(){}
     //initialize player in player class?
-    private IOConsole console = new IOConsole(AnsiColor.WHITE);
+    private IOConsole console = AnsiColor.BLACK_AND_WHITE.ioConsole;
     public Player player;
     private final LinkedList<Environment> environments = new LinkedList<>();
     //make generating environments into factory?
@@ -26,7 +26,7 @@ public final class Game implements Runnable {
         console.println("What's your name?");
         player.setName(InputTaker.getPlayerName());
         console.println("Your name is now: " + player.getName() + ". Welcome!");
-        console.println("If this is your first time playing, try typing \"help\" to get information on available commands.\n");
+        console.println("If this is your first time playing, try typing \"help\" to get information on available commands.");
         //add all environments
         environments.add(new DesertEntrance());
         environments.add(new FinalEnvironment());
@@ -40,7 +40,7 @@ public final class Game implements Runnable {
         while(keepGoing && currentEnvironment < environments.size()){
             Boolean playerSurvived = environments.get(currentEnvironment).start();
             if(!playerSurvived){
-                IOConsole.printlin("GAME OVER. Retry?(y/n)");
+                console.println("GAME OVER. Retry?(y/n)");
                 keepGoing = InputTaker.getYesOrNo();
             }
             else{
