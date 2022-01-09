@@ -89,5 +89,8 @@ public final class Player implements Being {
             console.println("Description: " + output.getDescription());
         }
     }
+    public void resetHealth(){
+        this.hp = maxHp;
+    }
 
 }

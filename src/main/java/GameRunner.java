@@ -16,3 +16,5 @@ public final class GameRunner {
 
 
 
+//BATTLE:
+    //have you set your attack first before opponent goes

@@ -40,6 +40,7 @@ public final class Game implements Runnable {
         while(keepGoing && currentEnvironment < environments.size()){
             Boolean playerSurvived = environments.get(currentEnvironment).start();
             if(!playerSurvived){
+                Player.getYou().resetHealth();
                 console.println("GAME OVER. Retry?(y/n)");
                 keepGoing = InputTaker.getYesOrNo();
             }

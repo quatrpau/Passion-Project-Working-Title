@@ -3,6 +3,7 @@ package utilities;
 import models.Player;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 public final class InputTaker {
     private static final String HELP = "Available Commands: \n" +
@@ -56,7 +57,7 @@ public final class InputTaker {
         return false;
     }
     public static boolean getYesOrNo(){
-        return Boolean.TRUE.equals(yesOrNo(getPlayerInput()));
+        return Boolean.TRUE.equals(yesOrNo(Objects.requireNonNull(getPlayerInput())));
     }
     //global verb check (status, stat, inventory, //look around, //exit)
     private static String lookCheck(String raw){

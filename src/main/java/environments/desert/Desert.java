@@ -98,8 +98,9 @@ public class Desert implements Environment {
 
     private Boolean battleChanceCalculator() {
         if(day == 0){
-            int twenty = random.nextInt(20);
-            return twenty == 1;
+            return true;
+            //int twenty = random.nextInt(20);
+            //return twenty == 1;
         }
         if(day == 1){
             int ten = random.nextInt(10);
