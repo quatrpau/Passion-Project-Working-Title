@@ -45,6 +45,7 @@ public class Snake implements Challenger {
 
     @Override
     public Obtainable giveReward() {
+        AnsiColor.RED.ioConsole.println("You got Snakeskin!");
         Snakeskin.statIncrease();
         return new Snakeskin();
     }
@@ -77,14 +78,13 @@ public class Snake implements Challenger {
 
     @Override
     public boolean surrenderDecision() {
-        Random random = new Random();
         if(hp > 100){
             return false;
         }
         else if(hp < 25){
             return true;
         }
-        return random.nextBoolean();
+        return new Random().nextBoolean();
     }
 
     @Override

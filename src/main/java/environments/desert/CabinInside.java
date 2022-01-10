@@ -42,6 +42,7 @@ public class CabinInside implements Environment {
                     if(!macheteGot){
                         console.println("Got the machete!");
                         Player.getYou().addToInventory(new Machete());
+                        Machete.statIncrease();
                         macheteGot = true;
                         setFlavorText("Nothing is left...");
                     }
@@ -74,7 +75,7 @@ public class CabinInside implements Environment {
         return true;
     }
     private String inputRepair(String raw){
-        if(raw.equals("get machete")){
+        if(raw.equals("get machete") || raw.equals("take machete")){
             return "get machete";
         }
         if(raw.equals("leave") || raw.equals("go back")){

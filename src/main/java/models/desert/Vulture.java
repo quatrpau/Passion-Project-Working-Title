@@ -45,6 +45,7 @@ public class Vulture implements Challenger {
 
     @Override
     public Obtainable giveReward() {
+        AnsiColor.RED.ioConsole.println("You got a Feather");
         Feather.statIncrease();
         return new Feather();
     }
@@ -52,8 +53,7 @@ public class Vulture implements Challenger {
     @Override
     public int decideTime() {
         //has no preference
-        Random random = new Random();
-        int rando = random.nextInt(100) + 1;
+        int rando = new Random().nextInt(100) + 1;
         if(hp > 30){
             if(rando >= 25 ){
                 return 2;
@@ -78,14 +78,13 @@ public class Vulture implements Challenger {
     @Override
     public boolean surrenderDecision() {
         //no chance of surrender until lower
-        Random random = new Random();
         if(hp > 50){
             return false;
         }
         else if(hp < 15){
             return true;
         }
-        return random.nextBoolean();
+        return new Random().nextBoolean();
     }
 
     @Override

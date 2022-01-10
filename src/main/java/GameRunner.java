@@ -16,5 +16,23 @@ public final class GameRunner {
 
 
 
+//ENEMY AI:
+//have them surrender if they notice you can kill them in one hit
+
+
 //BATTLE:
-    //have you set your attack first before opponent goes
+    //have you set your attack first before opponent goes (half done)
+    //have random numbers vary between executions
+//SOMething which differentiates battles textually
+
+//add "you won't last long without a weapon" maybe have woman say it
+//maybe nerf the machete
+//add attack capabilities to rock
+//surrender caption prints twice
+
+//add goodies for surrendering
+
+
+//DESERT:
+// after You reached an agreement reprint the flavorText
+

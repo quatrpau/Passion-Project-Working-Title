@@ -17,7 +17,7 @@ public class Machete implements Obtainable {
         return "A bit rusty, but still does the job. Increases damage by 100.";
     }
 
-    public void statIncrease(){
+    public static void statIncrease(){
         AnsiColor.BLACK_AND_WHITE.ioConsole.println("Increased damage by 100.");
         Player.getYou().addDamage(100);
     }

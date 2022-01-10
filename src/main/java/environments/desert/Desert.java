@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Desert implements Environment {
     //have you die of thirst if you go without the cactus
     private int day = 0;
-    private final Random random = new Random();
     private final IOConsole console = AnsiColor.YELLOW.ioConsole;
     private String flavorText = "You see nothing but sand, and you hope it stays that way. You must keep heading north. \n" +
             "(NOTE: Each turn counts as a day passed.)\nDays to Dragon: ";
@@ -103,15 +102,15 @@ public class Desert implements Environment {
             //return twenty == 1;
         }
         if(day == 1){
-            int ten = random.nextInt(10);
+            int ten = new Random().nextInt(10);
             return ten == 1;
         }
         if(day == 2){
-            int five = random.nextInt(5);
+            int five = new Random().nextInt(5);
             return five == 1;
         }
         if(day == 3){
-            int two = random.nextInt(2);
+            int two = new Random().nextInt(2);
             return two == 1;
         }
         else{
@@ -120,7 +119,7 @@ public class Desert implements Environment {
     }
     //function which returns a random type of challenger
     private Challenger opponentSelector(){
-        int choice = random.nextInt(3);
+        int choice = (new Random()).nextInt(3);
         if(choice == 0){
             return new GiantScorpion();
         }

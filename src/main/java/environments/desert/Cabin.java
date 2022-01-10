@@ -70,6 +70,7 @@ public class Cabin implements Environment {
                 else if(choice.equals("enter")){
                     if(door.isOpen()){
                         inside.start();
+                        giveFlavorText();
                     }
                     else{
                         console.println("The door is locked!");
@@ -103,7 +104,7 @@ public class Cabin implements Environment {
             return "go back";
         }
         else if(raw.equals("enter cabin") || raw.equals("enter") || raw.equals("enter door")
-        || raw.equals("use door")){
+        || raw.equals("use door") || raw.equals("go in") || raw.equals("go inside")){
             return "enter";
         }
         else if(raw.equals("look") || raw.equals("look around")){

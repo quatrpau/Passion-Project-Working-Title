@@ -18,7 +18,8 @@ public class Snakeskin implements Obtainable {
     }
 
     public static void statIncrease(){
-        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Max hp increased by 200!");
+        AnsiColor.BLACK_AND_WHITE.ioConsole.println("Max Hp increased by 200!");
+        //maybe have this restore health too?
         Player.getYou().addMaxHp(200);
     }
 }

@@ -45,6 +45,7 @@ public class GiantScorpion implements Challenger {
 
     @Override
     public Obtainable giveReward() {
+        AnsiColor.RED.ioConsole.println("You got Venom!");
         Venom.statIncrease();
         return new Venom();
     }
@@ -52,8 +53,7 @@ public class GiantScorpion implements Challenger {
     @Override
     public int decideTime() {
         //favors attack
-        Random random = new Random();
-        int rando = random.nextInt(100) + 1;
+        int rando = new Random().nextInt(100) + 1;
         if(hp > 30){
             if(rando <= 60 ){
                 return 2;
@@ -77,14 +77,13 @@ public class GiantScorpion implements Challenger {
 
     @Override
     public boolean surrenderDecision() {
-        Random random = new Random();
         if(hp > 50){
             return false;
         }
         else if(hp < 25){
             return true;
         }
-        return random.nextBoolean();
+        return new Random().nextBoolean();
     }
 
     @Override

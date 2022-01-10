@@ -99,14 +99,14 @@ public class DesertEntrance implements Environment {
         return false;
     }
     private String inputRepair(String raw){
-        if(raw.equals("go cabin") || raw.equals("go left")){
+        if(raw.equals("go cabin") || raw.equals("go right")){
             return "go cabin";
         }
         else if(raw.equals("go woman") || raw.equals("talk to woman")
                 || raw.equals("go guide") || raw.equals("talk to guide") ){
             return "go woman";
         }
-        else if(raw.equals("go cactus") || raw.equals("go right")){
+        else if(raw.equals("go cactus") || raw.equals("go left")){
             return "go cactus";
         }
         else if(raw.equals("go desert") || raw.equals("enter desert")){

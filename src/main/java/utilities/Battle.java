@@ -20,37 +20,36 @@ public final class Battle {
     //chance of peace?
     public Boolean start(){
         boolean openToPeace = false;
-        Turn intraTurnCommunicationStation;
-        Action actionStorage;
-        int magnitude;
-        Turn interTurnCommunicationStation = null;
+        Turn playerTurn = null;
+        Turn opponentTurn = null;
         boolean firstTurn = true;
         //check if opponent and you are alive every turn
         while(opponent.isAlive() && you.isAlive() && !openToPeace){
             boolean playerGoesFirst = you.getSpeed() > opponent.getSpeed();
             if(firstTurn){
+                playerTurn = playerTurn();
                 if(playerGoesFirst){
                     //can these go inside each other
-                    intraTurnCommunicationStation = playerTurn();
-                    interTurnCommunicationStation = opponentTurn(intraTurnCommunicationStation);
+                    opponentTurn = opponentTurn(playerTurn);
+                    //playerTurn = playerTurn(opponentTurn);
                 }
                 else{
-                    intraTurnCommunicationStation = opponentTurn();
-                    interTurnCommunicationStation = playerTurn(intraTurnCommunicationStation);
+                    opponentTurn = opponentTurn();
                 }
                 firstTurn = false;
             }
             else {
-                if (playerGoesFirst) {
+                if (playerGoesFirst){
                     //can this be put inside each other
-                    intraTurnCommunicationStation = playerTurn(interTurnCommunicationStation);
-                    interTurnCommunicationStation = opponentTurn(intraTurnCommunicationStation);
-                } else {
-                    intraTurnCommunicationStation = opponentTurn(interTurnCommunicationStation);
-                    interTurnCommunicationStation = playerTurn(intraTurnCommunicationStation);
+                    playerTurn = playerTurn(opponentTurn);
+                    opponentTurn = opponentTurn(playerTurn);
+                }
+                else{
+                    opponentTurn = opponentTurn(playerTurn);
+                    playerTurn = playerTurn(opponentTurn);
                 }
             }
-            if(intraTurnCommunicationStation.getAction() == Action.SURRENDER && interTurnCommunicationStation.getAction() == Action.SURRENDER){
+            if(playerTurn.getAction() == Action.SURRENDER && opponentTurn.getAction() == Action.SURRENDER){
                 openToPeace = true;
             }
         }
@@ -65,7 +64,10 @@ public final class Battle {
         //exception handler?
         Action actionStorage;
         while(true){
-            if((actionStorage = getAction(InputTaker.getPlayerInput())) != null){
+            if((actionStorage = getAction(Objects.requireNonNull(InputTaker.getPlayerInput()))) != null){
+                if(actionStorage == Action.BLOCK){
+                    console.println("You block: causing incoming damage to be lessened");
+                }
                 return new Turn(actionStorage, this.you);
             }
             else{
@@ -77,13 +79,13 @@ public final class Battle {
         Action actionStorage = getAction(String.valueOf(opponent.decideTime()));
         switch(Objects.requireNonNull(actionStorage)){
             case SURRENDER:
-                console.println("Your opponent attempts to surrender.");
+                //console.println("Your opponent attempts to surrender.");
                 break;
             case ATTACK:
-                console.println("Your opponent attacks!");
+                //console.println("Your opponent attacks!");
                 break;
             case BLOCK:
-                console.println("Your opponent prepares to block");
+                //console.println("Your opponent prepares to block");
                 break;
         }
         return new Turn(actionStorage,this.opponent);
@@ -95,7 +97,7 @@ public final class Battle {
             return new Turn(Action.DEFER,this.you);
         }
         if(opponentTurn.getAction() == Action.SURRENDER){
-            console.println("Do you accept your opponent's surrender?(y/n)");
+            console.println("Your opponent is attempting to surrender. Do you accept?(y/n)");
             if(InputTaker.getYesOrNo()){
                 console.println("You accept and the battle ends.");
                 return new Turn(Action.SURRENDER, this.you);
@@ -106,6 +108,7 @@ public final class Battle {
             }
         }
         if(opponentTurn.getAction() == Action.BLOCK){
+            console.println("Your opponent prepares to block");
             Turn returnal = playerTurn();
             if(returnal.getAction() == Action.ATTACK){
                 returnal.setMagnitude(returnal.getMagnitude() / 2);
@@ -114,10 +117,11 @@ public final class Battle {
         }
         else{
             //print out toString of each being?
+            console.println("Your opponent attacks!");
             you.takeDamage(opponentTurn.getMagnitude());
             console.println("You take damage! Your health is now " + you.getHp() + ".");
             if(you.isAlive()){
-                return playerTurn();
+                return playerTurn(); //player choose
             }
             return new Turn(Action.DEFER,this.you);
         }
